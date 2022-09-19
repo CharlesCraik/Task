@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16.133" height="16.133" viewBox="0 0 16.133 16.133">
+  <g id="vuesax_outline_clock" data-name="vuesax/outline/clock" transform="translate(-172 -188)" opacity="0.52">
+    <g id="clock" transform="translate(172 188)">
+      <path id="Vector" d="M7.226,14.453a7.226,7.226,0,1,1,7.226-7.226A7.233,7.233,0,0,1,7.226,14.453Zm0-13.445a6.218,6.218,0,1,0,6.218,6.218A6.226,6.226,0,0,0,7.226,1.008Z" transform="translate(0.84 0.84)" fill="#1c1c1c"/>
+      <path id="Vector-2" data-name="Vector" d="M3.24,6.164a.45.45,0,0,1-.255-.074L.9,4.847A1.983,1.983,0,0,1,0,3.26V.5A.508.508,0,0,1,.5,0a.508.508,0,0,1,.5.5V3.26a.993.993,0,0,0,.41.719L3.5,5.223a.5.5,0,0,1,.175.692A.518.518,0,0,1,3.24,6.164Z" transform="translate(7.321 4.544)" fill="#1c1c1c"/>
+      <path id="Vector-3" data-name="Vector" d="M0,0H16.133V16.133H0Z" fill="none" opacity="0"/>
+    </g>
+  </g>
+</svg>

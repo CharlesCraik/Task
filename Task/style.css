@@ -27,6 +27,12 @@ h3 {
     color: #1c1c1c;
 }
 
+h5 {
+    font-weight: 600;
+    font-size: 1em;
+    margin-bottom: 4px;
+}
+
 ul li, ol li {
     list-style: none;
     padding: 0;
@@ -101,6 +107,10 @@ span.subtitle {
     height: 100%;
 }
 
+img.data-separator {
+    margin: 0 8px;
+}
+
 /*Details*/
 header.header-wrap {
     margin: 0 auto;
@@ -145,6 +155,7 @@ section.main-viewport {
 
 .projects-container {
     width: 70%;
+    margin-bottom: 2em;
 }
 
 ul.projects-list {
@@ -157,7 +168,8 @@ li.project-item {
     padding: 1.5em;
     background: #1c1c1c;
     border-radius: 8px;
-    width: 28%;
+    max-width: 28%;
+    min-width: 26%;
 }
 
 h5.project-title {
@@ -207,4 +219,151 @@ span.project-progress-status {
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.latest-tasks-container {
+    width: 63%;
+    min-width: 63%;
+    display: block;
+}
+
+li.task-item {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+li.task-item:last-child{
+    margin-bottom: 0;
+}
+
+.task-details:before {
+    content: '';
+    background: #eee;
+    width: 8px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    border-radius: 50px;
+}
+
+.task-details {
+    position: relative;
+    padding-left: 20px;
+}
+
+.task-data {
+    display: flex;
+    align-items: center;
+}
+
+.task-data > span {
+    color: #898989;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+label.task-marker-container {
+    width: 40px;
+    height: 40px;
+    background: #eee;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+input.task-marker {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+span.task-marker-display {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+span.task-marker-display img {
+    width: 100%;
+    height: 100%;
+}
+
+.task-time-container {
+    width: 70%;
+    align-items: flex-start;
+}
+
+.latest-timesheets-container {
+    width: 34%;
+    display: block;
+    padding-left: 3%;
+}
+
+li.timesheet-item {
+    background: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+li.timesheet-item:last-child{
+    margin-bottom: 0;
+}
+
+.timesheet-details {
+    align-items: flex-start;
+    position: relative;
+    padding-left: 20px;
+}
+
+.timesheet-data > span {
+    color: #898989;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+
+.timesheet-data > span:last-child {
+    margin: 0;
+}
+
+.timesheet-details:before {
+    content: '';
+    width: 8px;
+    height: 100%;
+    background: #eee;
+    position: absolute;
+    left: 0;
+    border-radius: 50px;
+}
+
+span.timesheet-project {
+    background: #daf896;
+    font-size: 14px;
+    padding: 2px 12px;
+    border-radius: 50px;
+    font-weight: 500;
+}
+
+.timesheet-data > span img {
+    margin-right: 4px;
 }

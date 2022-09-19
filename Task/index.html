@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
+      <title>Task</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/8f070deca5.js" crossorigin="anonymous"></script>
   </head>
@@ -36,7 +37,7 @@
             <div class="projects-container">
                 <div class="content-title-container row">
                     <h3 class="content-title">Your Projects</h3>
-                    <button class="btn primary">Add Project <i class="fa-solid fa-plus btn-icon"></i></button>
+                    <button class="btn primary" id="newProject">Add Project <i class="fa-solid fa-plus btn-icon"></i></button>
                 </div>
                 <ul class="projects-list" id="mainProjects">
                     <li class="project-item">
@@ -130,6 +131,52 @@
                         </div>
                     </li>
                 </ul>
+            </div>
+            <div class="task-time-container row">
+                <div class="latest-tasks-container">
+                    <div class="content-title-container row">
+                        <h3 class="content-title">Your Tasks</h3>
+                        <button class="btn primary" id="newTask">Add Task <i class="fa-solid fa-plus btn-icon"></i></button>
+                    </div>
+                    <ul class="tasks-list" id="latestTasks">
+                        <li class="task-item">
+                            <div class="task-details">
+                                <h5>Task Item</h5>
+                                <div class="task-data">
+                                    <span class="task-due-date">Due: DD MMMM YYYY</span>
+                                    <img src="media/Dot.svg" class="data-separator">
+                                    <span class="task-project">Project Name</span>
+                                </div>
+                            </div>
+                            <label class="task-marker-container">
+                                <input type="checkbox" class="task-marker">
+                                <span class="task-marker-display"><img src="media/check.svg"></span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="latest-timesheets-container">
+                    <div class="content-title-container row">
+                        <h3 class="content-title">Timesheets</h3>
+                        <button class="btn primary" id="newTimesheet">Add Time <i class="fa-solid fa-plus btn-icon"></i></button>
+                    </div>
+                    <ul class="timesheet-list" id="latestTimeSheets">
+                        <li class="timesheet-item">
+                            <div class="timesheet-details column">
+                                <h5 id="timesheetName">Timesheet title</h5>
+                                <div class="timesheet-data">
+                                    <span class="timesheet-date" id="timesheetDate"><img src="media/Calendar.svg"> 1 Sept 2022</span>
+                                    <span class="timesheet-time" id="timesheetTime"><img src="media/Clock.svg"> 0hrs 00mins</span>
+                                </div>
+                            </div>
+                            <div class="timesheet-project-container">
+                                <span class="timesheet-project" id="timesheetProject">
+                                    Project Name
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
