@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-      <title>Task</title>
+    <title>Task</title>
+    <link rel="icon" type="image/x-icon" href="media/file.svg">
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/8f070deca5.js" crossorigin="anonymous"></script>
   </head>
@@ -13,10 +14,15 @@
                     <img src="media/Logo.svg" class="logo">
                 </div>
             </div>
+            <div class="nav-bar">
+                <ul class="main-menu row">
+                    <li class="menu-item"><a href='#' id="openSettings">Settings</a></li>
+                </ul>
+            </div>
         </section>
     </header>
     <section class="main-viewport row">
-        <div class="viewport-sidebar">
+        <!-- <div class="viewport-sidebar">
             <div class="content-nav-container column">
                 <ul class="content-nav column">
                     <li class="content-nav-item">
@@ -26,133 +32,33 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div> -->
         <div class="viewport-content">
             <div class="viewport header">
                 <div class="viewport-title-container">
                     <h1>Your Workspace</h1>
-                    <span class="subtitle">01 Jan 2022</span>
+                    <span class="subtitle" id="mainDate">01 Jan 2022</span>
                 </div>
             </div>
-            <div class="projects-container">
-                <div class="content-title-container row">
-                    <h3 class="content-title">Your Projects</h3>
-                    <button class="btn primary" id="newProject">Add Project <i class="fa-solid fa-plus btn-icon"></i></button>
+        <div class="content row">
+            <div class="dash-left-col">
+                <div class="projects-container">
+                    <div class="content-title-container row">
+                        <h3 class="content-title">Your Projects</h3>
+                        <button class="btn primary" id="newProject">Add Project <i class="fa-solid fa-plus btn-icon"></i></button>
+                    </div>
+                    <ul class="projects-list" id="mainProjects">
+                        <span class="subtitle">You need to add some projects</span>
+                    </ul>
                 </div>
-                <ul class="projects-list" id="mainProjects">
-                    <li class="project-item">
-                        <div class="project-details row">
-                            <div class="display-info column">
-                                <h5 class="project-title">
-                                    Project Title
-                                </h5>
-                                <span class="subtitle">
-                                    Due: 01 Jan 2022
-                                </span>
-                            </div>
-                            <div class="project-actions">
-                                <div class="img-container icon">
-                                    <img src="media/Settings.svg" class="icon">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-progress">
-                            <div class="progress-bar">
-                                <div class="progress-completion-rate"></div>
-                            </div>
-                            <div class="progress-details row">
-                                <span class="project-task-count label-text">
-                                    15/30 Tasks
-                                </span>
-                                <span class="project-progress-status label-text">
-                                    <i class="fa-solid fa-circle"></i> In Progress
-                                </span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="project-item">
-                        <div class="project-details row">
-                            <div class="display-info column">
-                                <h5 class="project-title">
-                                    Project Title
-                                </h5>
-                                <span class="subtitle">
-                                    Due: 01 Jan 2022
-                                </span>
-                            </div>
-                            <div class="project-actions">
-                                <div class="img-container icon">
-                                    <img src="media/Settings.svg" class="icon">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-progress">
-                            <div class="progress-bar">
-                                <div class="progress-completion-rate"></div>
-                            </div>
-                            <div class="progress-details row">
-                                <span class="project-task-count label-text">
-                                    15/30 Tasks
-                                </span>
-                                <span class="project-progress-status label-text">
-                                    <i class="fa-solid fa-circle"></i> In Progress
-                                </span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="project-item">
-                        <div class="project-details row">
-                            <div class="display-info column">
-                                <h5 class="project-title">
-                                    Project Title
-                                </h5>
-                                <span class="subtitle">
-                                    Due: 01 Jan 2022
-                                </span>
-                            </div>
-                            <div class="project-actions">
-                                <div class="img-container icon">
-                                    <img src="media/Settings.svg" class="icon">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project-progress">
-                            <div class="progress-bar">
-                                <div class="progress-completion-rate"></div>
-                            </div>
-                            <div class="progress-details row">
-                                <span class="project-task-count label-text">
-                                    15/30 Tasks
-                                </span>
-                                <span class="project-progress-status label-text">
-                                    <i class="fa-solid fa-circle"></i> In Progress
-                                </span>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="task-time-container row">
+                <div class="task-time-container row">
                 <div class="latest-tasks-container">
                     <div class="content-title-container row">
                         <h3 class="content-title">Your Tasks</h3>
                         <button class="btn primary" id="newTask">Add Task <i class="fa-solid fa-plus btn-icon"></i></button>
                     </div>
                     <ul class="tasks-list" id="latestTasks">
-                        <li class="task-item">
-                            <div class="task-details">
-                                <h5>Task Item</h5>
-                                <div class="task-data">
-                                    <span class="task-due-date">Due: DD MMMM YYYY</span>
-                                    <img src="media/Dot.svg" class="data-separator">
-                                    <span class="task-project">Project Name</span>
-                                </div>
-                            </div>
-                            <label class="task-marker-container">
-                                <input type="checkbox" class="task-marker">
-                                <span class="task-marker-display"><img src="media/check.svg"></span>
-                            </label>
-                        </li>
+                        <span class="subtitle">You need to add some tasks</span>
                     </ul>
                 </div>
                 <div class="latest-timesheets-container">
@@ -177,9 +83,149 @@
                         </li>
                     </ul>
                 </div>
+                </div>
+            </div>
+            <div class="analytics-container">
+                <div class="total-tasks-container row">
+                    <div class="total-tasks-progress-container">
+                        <div class="circular-progress" id="totalTaskProgress">
+                            <div class="value-container" id="totalTaskProgressValue">0%</div>
+                        </div>
+                    </div>
+                    <div class="total-tasks-details">
+                        <h5>Overall Progress</h5>
+                        <span class="subtitle" id="totalTasksDisplay">30/100 Tasks Complete</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="create-project-wrap inactive" id="createProject">
+        <div class="create-project-container">
+            <div class="popup-header">
+                <h3>Create New Project</h3>
+                <img class="close-btn" src="media/Cross.svg">
+            </div>
+            <form class="create-project" id="addProject">
+                <div class="text-container project-name field-container">
+                    <label>Title</label>
+                    <input type="text" class="text-input" placeholder="Name your project..." id="projectNameInput">
+                </div>
+                <div class="select-container project-type field-container">
+                    <label>Type</label>
+                    <select id="projectTypeInput" placeholder="Select project type..." id="projectTypeInput">
+                        <option value="">Select Project Type</option>
+                        <option value="Web Development">Web Development</option>
+                        <option value="Mobile App Development">Mobile App Development</option>
+                        <option value="Game Development">Game Development</option>
+                        <option value="Design Work">Design Work</option>
+                        <option value="Adhoc">Adhoc</option>
+                    </select>
+                </div>
+                <div class="date-container project-due-date field-container">
+                    <label>Due Date</label>
+                    <input type="date" class="text-input" placeholder="Set project due date..." id="projectDueDateInput">
+                </div>
+                <div class="textarea-container project-description field-container">
+                    <label>Description</label>
+                    <input type="textarea" class="textarea-input" placeholder="Describe your project..." id="projectDescInput">
+                </div>
+                <div class="project-color-field-wrap">
+                    <label>
+                        <input type="radio" value="#DBF996" class="color-select" name="color-select">
+                    </label>
+                    <label>
+                        <input type="radio" value="#FFA1A1" class="color-select" name="color-select">
+                    </label>
+                    <label>
+                        <input type="radio" value="#FFB8D3" class="color-select" name="color-select">
+                    </label>
+                    <label>
+                        <input type="radio" value="#BFEFF1" class="color-select" name="color-select">
+                    </label>
+                    <label>
+                        <input type="radio" value="#F7F9B4" class="color-select" name="color-select">
+                    </label>
+                    <label>
+                        <input type="radio" value="#FFC9A1" class="color-select" name="color-select">
+                    </label>
+                    <label>
+                        <input type="radio" value="#C1E1FF" class="color-select" name="color-select">
+                    </label>
+                    <label>
+                        <input type="radio" value="#CDB8FF" class="color-select" name="color-select">
+                    </label>
+                    <label>
+                        <input type="radio" value="#92B0F6" class="color-select" name="color-select">
+                    </label>
+                    <label>
+                        <input type="radio" value="#C8C8C8" class="color-select" name="color-select">
+                    </label>
+                </div>
+                <div class="submit-container field-container">
+                    <button type="submit" class="btn primary">Create Project</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="create-task-wrap inactive" id="createTask">
+        <div class="create-task-container">
+            <div class="popup-header">
+                <h3>Create New Task</h3>
+                <img class="close-btn" src="media/Cross.svg">
+            </div>
+            <form class="create-task" id="addTask">
+                <div class="field-container task-name">
+                    <label>Title</label>
+                    <input type="text" class="text-input" placeholder="Name your task..." id="taskNameInput">
+                </div>
+                <div class="field-container task-project">
+                    <label>Project</label>
+                    <select id="taskProjectInput" placeholder="Select project...">
+                        <option value="">Select Project</option>
+                    </select>
+                </div>
+                <div class="field-container task-due-date">
+                    <label>Due Date</label>
+                    <input type="date" class="text-input" placeholder="Set task due date..." id="taskDueDateInput">
+                </div>
+                <div class="field-container task-description">
+                    <label>Description</label>
+                    <input type="textarea" class="textarea-input" placeholder="Describe your task..." id="taskDescInput">
+                </div>
+                <div class="field-container submit-container">
+                    <button type="submit" class="btn primary">Create Task</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="settings-wrap inactive" id="settings">
+        <div class="settings-container">
+            <div class="popup-header">
+                <h3>Settings</h3>
+                <img class="close-btn" src="media/Cross.svg">
+            </div>
+            <div class="project-type-display">
+                <form class="project-type-form" id="newType">
+                    <div class="field-container new-project-type">
+                        <label>New Project Type</label>
+                        <div>
+                            <input type="text" class="text-input" placeholder="Name your project type..." id="projectTypeInput">
+                            <button type="submit" class="btn primary input-case"><i class="fa-solid fa-plus btn-icon"></i></button>
+                        </div>
+                    </div>
+                </form>
+                <span class="subtitle separator-inc"># of project types</span>
+                <ul class="project-type-list">
+                    <li class="project-type-item">
+                        <h5>Project Type Name</h5>
+                        <button class="project-type-delete" id="deleteType"><img src="media/cross.svg"></button>
+                    </li>
+                </ul>
             </div>
         </div>
     </section>
     <script src="script.js"></script>
-  </body>
+  </body> 
 </html>
