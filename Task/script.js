@@ -78,7 +78,10 @@ const project = {
     type: 'Project Type',
     due_date: 'Project Due',
     description: 'Project Description',
-    color: '#eeeeee'
+    color: '#eeeeee',
+    tasks: 0,
+    completedTasks: 0,
+    progress: 0
 }
 
 projectForm.addEventListener('submit', function(event){
@@ -97,7 +100,7 @@ projectForm.addEventListener('submit', function(event){
 });
 
 function addProject(p_name, p_type, p_dueDate, p_description, p_color){
-    console.log(p_name, p_type, p_dueDate, p_description, p_color);
+    //console.table(p_name, p_type, p_dueDate, p_description, p_color);
     if(p_name !== ''){
         const project = {
             id: Date.now(),
@@ -105,7 +108,10 @@ function addProject(p_name, p_type, p_dueDate, p_description, p_color){
             type: p_type,
             due_date: p_dueDate,
             description: p_description,
-            color: p_color
+            color: p_color,
+            tasks: 0,
+            completedTasks: 0,
+            progress: 0
         };
 
         projects.push(project);
@@ -151,12 +157,12 @@ function renderProjects(projects){
                 </div>
             </div>
             <div class="project-progress">
-                <div class="progress-bar">
-                    <div class="progress-completion-rate"></div>
+                <div class="progress-bar" id="projectProgressBar" data-key='${item.id}'>
+                    <div class="progress-completion-rate" style="width: ${item.progress}%"></div>
                 </div>
                 <div class="progress-details row">
-                    <span class="project-task-count label-text">
-                        15/30 Tasks
+                    <span class="project-task-count label-text" id="projectProgressCount" data-key='${item.id}'>
+                        ${item.completedTasks}/${item.tasks} Tasks Complete
                     </span>
                     <span class="project-progress-status label-text">
                         <i class="fa-solid fa-circle"></i> In Progress
@@ -164,7 +170,6 @@ function renderProjects(projects){
                 </div>
             </div>
         `;
-
         projectDisplay.prepend(p_li);
     });
 }
@@ -216,16 +221,17 @@ taskForm.addEventListener('submit', function(event){
     taskCreator.classList.remove('active');
     taskCreator.classList.add('inactive');
     totalTaskProgressDisplay(tasks);
+    displayProgress();
 });
 
 function getProjectColor(project){
     const result = projects.filter(proj => proj.name == project).map(filtProj => filtProj.color);
-    console.log(result);
+    //console.log(result);
     return result;
 }
 
 function addTask(t_name, t_project, t_dueDate, t_description){
-    console.log(t_name, t_project, t_dueDate, t_description);
+    //console.log(t_name, t_project, t_dueDate, t_description);
     if(t_name !== ''){
         const task = {
             id: Date.now(),
@@ -236,11 +242,10 @@ function addTask(t_name, t_project, t_dueDate, t_description){
             description: t_description,
             color: getProjectColor(t_project)
         };
-
         tasks.push(task);
+        addTaskToProject(t_project);
         saveTask(tasks);
-        //getProjectColor(task.project);
-        taskForm.querySelectorAll('input').values = '';
+        taskForm.querySelectorAll('input').value = '';
         taskProject.value = '';
     }
 }
@@ -254,6 +259,7 @@ function renderTasks(tasks){
         t_li.setAttribute('class', 'task-item');
         t_li.setAttribute('data-key', item.id);
         t_li.setAttribute('task-color', item.color);
+        t_li.setAttribute('project-data', item.project)
 
         if(item.completed === true){
             t_li.classList.add('task-complete');
@@ -274,8 +280,8 @@ function renderTasks(tasks){
             </label>
             <button class="task-delete" id="deleteTask"><img src="media/cross.svg"></button>
         `;
-
         taskList.prepend(t_li);
+        projectProgress(projects);
     });
 }
 
@@ -308,28 +314,50 @@ function taskMarkComplete(id){
     console.log(id);
     tasks.forEach(function(item){
         if(item.id == id){
+            projects.forEach(function(project){
+                if(project.name == item.project && item.completed == false){
+                    project.completedTasks = project.completedTasks + 1;
+                }
+                else if(project.name == item.project && item.completed == true){
+                    project.completedTasks = project.completedTasks - 1;
+                }
+            });
             item.completed = !item.completed;
         }
     });
     saveTask(tasks);
+    saveProject(projects);
     displayProgress();
     totalTaskProgressDisplay(tasks);
 }
 
 function deleteTask(id) {
     tasks = tasks.filter(function(item) {
-      return item.id != id;
+        projects.forEach(function(p){
+            if(p.name == item.project){
+                p.tasks = p.task - 1;
+            }
+            
+            if(p.name == item.project && item.completed == true){
+                p.completedTasks = p.completedTasks - 1;
+            }
+        });
+        return item.id != id;
     });
     saveTask(tasks);
+    saveProject(projects);
     totalTaskProgressDisplay(tasks);
+    displayProgress();
 }
 
 function findTotalTaskProgress(tasks){
     const completedTasks = tasks.filter(t => t.completed == true);
     //console.log(completedTasks.length);
     //console.log(tasks.length);
-    //console.log((completedTasks.length / tasks.length) * 100);
-    return (completedTasks.length / tasks.length) * 100;
+    //console.log((completedTasks.length / tasks.length) * 100)
+    var result = (completedTasks.length / tasks.length) * 100;
+    var progress = Math.round(result);
+    return progress;
 }
 
 
@@ -354,8 +382,11 @@ function displayProgress(){
             }
         }, speed);
     }
+    else if(tasks.length <= 0){
+        progressBar.style.background = '#f5f5f5';
+    }
     else{
-        progressBar.style.background = '#f5f5f5'
+        progressBar.style.background = '#f5f5f5';
     }
 }
 displayProgress();
@@ -368,4 +399,28 @@ function totalTaskProgressDisplay(tasks){
     displayText.innerHTML = `${complete}/${totalTasks} Tasks Complete`;
 }
 totalTaskProgressDisplay(tasks);
+
+function addTaskToProject(projectName){
+    projects.forEach(function(item){
+        if(item.name == projectName){
+            item.tasks = item.tasks + 1;
+            console.log(item.name + ' tasks: ' + item.tasks);
+            saveProject(projects);
+        }
+    });
+}
+
+function projectProgress(projects){
+    projects.forEach(function(item){
+        var completeTasks = item.completedTasks;
+        var totalTask = item.tasks;
+        var progress = Math.round((completeTasks / totalTask) * 100);
+        item.progress = progress;
+    });
+}
+
+
+
+
+
 
