@@ -9,6 +9,7 @@ dateDisplay.innerHTML = `${today}`;
 const projectCreator = document.querySelector("#createProject")
 const taskCreator = document.querySelector('#createTask');
 const settings = document.querySelector('#settings');
+const projectView = document.querySelector('#projectView');
 
 //Display -- Project Creator
 const closeProjectCreator = document.querySelector(".create-project-container div.popup-header .close-btn")
@@ -57,6 +58,69 @@ closeSettings.addEventListener('click', function(){
     settings.classList.add('inactive');
 });
 
+//Display -- Project
+const closeProjectSmall = document.querySelector(".project-view-container div.popup-header .close-btn")
+const closeProjectLarge = document.querySelector("#closeProjectBtn");
+//Close
+closeProjectSmall.addEventListener('click', function(){
+    projectView.classList.remove('active');
+    projectView.classList.add('inactive');
+});
+
+closeProjectLarge.addEventListener('click', function(){
+    projectView.classList.remove('active');
+    projectView.classList.add('inactive');
+});
+
+function openProject(id){
+    const projectTasks = document.querySelector('#projectContent');
+    projectView.classList.remove('inactive');
+    projectView.classList.add('active');
+    projectTasks.innerHTML = '';
+    projectTasks.innerHTML = `
+        <div class="project-details">
+        <div class="project-atts row">
+            <span class="attribute project-type" id="projectViewType">
+                Web Development
+            </span>
+            <span class="attribute project-status" id="projectViewStatus">
+                In Progress
+            </span>
+        </div>
+        <div class="project-description-container" id="projectViewDesc">
+            <p class="secondary-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Phasellus quis ligula molestie justo facilisis pretium 
+                sed sit amet tortor. In at mauris a lorem 
+                condimentum dapibus.
+            </p>
+        </div>
+    </div>
+    <div class="project-view-tasks-container">
+        <div class="project-view-tasks-header">
+            <h4>Tasks</h4>
+            <div class="progress-bar" id="projectViewProgressBar">
+                <div class="progress-completion-rate"></div>
+            </div>
+        </div>
+        <ul class="project-view-tasks" id="projectTasklist">
+            <li class="task-item project-task-item">
+                <div class="task-details">
+                    <h5>Task Title</h5>
+                    <div class="task-data">
+                        <span class="task-due-date">Due: 1 Sept 2022</span>
+                    </div>
+                </div>
+                <label class="task-marker-container" data-key='${id}'>
+                    <input type="checkbox" class="task-marker">
+                    <span class="task-marker-display"><img src="media/check.svg"></span>
+                </label>
+                <button class="task-delete" id="deleteTask"><img src="media/cross.svg"></button>
+            </li>
+        </ul>
+    </div>
+    `;
+}
 
 
 //Create -- Project
@@ -115,6 +179,7 @@ function addProject(p_name, p_type, p_dueDate, p_description, p_color){
         };
 
         projects.push(project);
+        projectProgress(projects);
         saveProject(projects);
         projectForm.querySelectorAll('input').values = '';
         projectType.value = '';
@@ -136,10 +201,11 @@ function renderProjects(projects){
     projectDisplay.innerHTML = '';
 
     projects.forEach(function(item){
+        projectProgress(projects);
         const p_li = document.createElement('li');
         p_li.setAttribute('class', 'project-item');
         p_li.setAttribute('data-key', item.id);
-
+        
         p_li.innerHTML = `
             <div class="project-details row">
                 <div class="display-info column">
@@ -152,7 +218,7 @@ function renderProjects(projects){
                 </div>
                 <div class="project-actions">
                     <div class="img-container icon">
-                        <img src="media/Settings.svg" class="icon">
+                        <img src="media/Settings.svg" class="icon" onClick="openProject(${item.id})">
                     </div>
                 </div>
             </div>
@@ -306,7 +372,20 @@ taskList.addEventListener('click', function(event){
     }
 
     if (event.target.classList.contains('task-delete')) {
+        var id = event.target.parentElement.getAttribute('data-key');
+        var project = tasks.filter(task => task.id == id).map(t => t.project);
+        const projectTasks = projects.filter(target => target.name == project).map(p => p.name);
+        var tasksProperty = '';
+        projectTasks.forEach(function(item){
+            tasksProperty = item;
+        });
+        projects.forEach(function(item){
+            if(item.name === tasksProperty){
+                item.tasks = item.tasks - 1;
+            }
+        })
         deleteTask(event.target.parentElement.getAttribute('data-key'));
+        saveProject(projects);
     }
 });
 
@@ -333,15 +412,14 @@ function taskMarkComplete(id){
 
 function deleteTask(id) {
     tasks = tasks.filter(function(item) {
-        projects.forEach(function(p){
-            if(p.name == item.project){
-                p.tasks = p.task - 1;
-            }
-            
-            if(p.name == item.project && item.completed == true){
-                p.completedTasks = p.completedTasks - 1;
-            }
-        });
+        if(item.id == id){
+            projects.forEach(function(p){
+                if(p.name === item.project && item.completed === true){
+                    console.log("Hello World");
+                    p.completedTasks = p.completedTasks - 1;
+                }
+            });
+        }
         return item.id != id;
     });
     saveTask(tasks);

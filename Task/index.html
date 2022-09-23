@@ -67,7 +67,8 @@
                         <button class="btn primary" id="newTimesheet">Add Time <i class="fa-solid fa-plus btn-icon"></i></button>
                     </div>
                     <ul class="timesheet-list" id="latestTimeSheets">
-                        <li class="timesheet-item">
+                        <span class="subtitle">You need to add some timesheets</span>
+                        <!--<li class="timesheet-item">
                             <div class="timesheet-details column">
                                 <h5 id="timesheetName">Timesheet title</h5>
                                 <div class="timesheet-data">
@@ -80,7 +81,7 @@
                                     Project Name
                                 </span>
                             </div>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
                 </div>
@@ -101,8 +102,8 @@
         </div>
         </div>
     </section>
-    <section class="create-project-wrap inactive" id="createProject">
-        <div class="create-project-container">
+    <section class="create-project-wrap inactive popup" id="createProject">
+        <div class="create-project-container popup-container">
             <div class="popup-header">
                 <h3>Create New Project</h3>
                 <img class="close-btn" src="media/Cross.svg">
@@ -169,8 +170,8 @@
             </form>
         </div>
     </section>
-    <section class="create-task-wrap inactive" id="createTask">
-        <div class="create-task-container">
+    <section class="create-task-wrap inactive popup" id="createTask">
+        <div class="create-task-container popup-container">
             <div class="popup-header">
                 <h3>Create New Task</h3>
                 <img class="close-btn" src="media/Cross.svg">
@@ -200,13 +201,13 @@
             </form>
         </div>
     </section>
-    <section class="settings-wrap inactive" id="settings">
-        <div class="settings-container">
+    <section class="settings-wrap inactive popup" id="settings">
+        <div class="settings-container popup-container">
             <div class="popup-header">
                 <h3>Settings</h3>
                 <img class="close-btn" src="media/Cross.svg">
             </div>
-            <div class="project-type-display">
+            <!--<div class="project-type-display">
                 <form class="project-type-form" id="newType">
                     <div class="field-container new-project-type">
                         <label>New Project Type</label>
@@ -223,6 +224,65 @@
                         <button class="project-type-delete" id="deleteType"><img src="media/cross.svg"></button>
                     </li>
                 </ul>
+            </div> -->
+        </div>
+    </section>
+    <section class="project-view inactive popup" id="projectView">
+        <div class="project-view-container popup-container">
+            <div class="popup-header">
+                <div class="project-header-container">
+                    <h3 id="projectViewTitle">Project Title</h3>
+                    <span class="subtitle" id="projectViewDate">
+                        Due: 1 Sept 2022
+                    </span>
+                </div>
+                <img class="close-btn" src="media/Cross.svg">
+            </div>
+            <div class="project-content" id="projectContent">
+                <div class="project-details">
+                    <div class="project-atts row">
+                        <span class="attribute project-type" id="projectViewType">
+                            Web Development
+                        </span>
+                        <span class="attribute project-status" id="projectViewStatus">
+                            In Progress
+                        </span>
+                    </div>
+                    <div class="project-description-container" id="projectViewDesc">
+                        <p class="secondary-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            Phasellus quis ligula molestie justo facilisis pretium 
+                            sed sit amet tortor. In at mauris a lorem 
+                            condimentum dapibus.
+                        </p>
+                    </div>
+                </div>
+                <div class="project-view-tasks-container">
+                    <div class="project-view-tasks-header">
+                        <h4>Tasks</h4>
+                        <div class="progress-bar" id="projectViewProgressBar">
+                            <div class="progress-completion-rate"></div>
+                        </div>
+                    </div>
+                    <ul class="project-view-tasks" id="projectTasklist">
+                        <li class="task-item project-task-item">
+                            <div class="task-details">
+                                <h5>Task Title</h5>
+                                <div class="task-data">
+                                    <span class="task-due-date">Due: 1 Sept 2022</span>
+                                </div>
+                            </div>
+                            <label class="task-marker-container" data-key='${item.id}'>
+                                <input type="checkbox" class="task-marker">
+                                <span class="task-marker-display"><img src="media/check.svg"></span>
+                            </label>
+                            <button class="task-delete" id="deleteTask"><img src="media/cross.svg"></button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="submit-container field-container">
+                <button class="btn primary" id="closeProjectBtn">Close</button>
             </div>
         </div>
     </section>

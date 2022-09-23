@@ -62,6 +62,12 @@ span.subtitle {
     font-size: 16px;
 }
 
+p.secondary-text {
+    color: #898989;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
 .btn {
     padding: 6px 14px;
     border-radius: 50px;
@@ -109,6 +115,19 @@ span.subtitle {
     position: absolute;
     left: 0;
     height: 100%;
+}
+
+span.attribute {
+    background: #eeeeee;
+    font-weight: 600;
+    padding: 4px 16px;
+    border-radius: 50px;
+    font-size: 14px;
+    margin-right: 1em;
+}
+
+span.attribute:last-child {
+    margin: 0;
 }
 
 img.data-separator {
@@ -253,6 +272,7 @@ li.project-item span.subtitle {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .content-title-container {
@@ -434,7 +454,7 @@ span.timesheet-project {
     margin-right: 4px;
 }
 
-section#createProject, section#createTask, section#settings {
+.popup {
     position: absolute;
     top: 0;
     width: 100%;
@@ -445,7 +465,7 @@ section#createProject, section#createTask, section#settings {
     background: #00000050;
 }
 
-.create-project-container, .create-task-container, .settings-container {
+.popup-container {
     padding: 2em;
     background: #fff;
     border-radius: 8px;
@@ -554,11 +574,11 @@ form.create-project .project-color-field-wrap {
     background: #C8C8C8;
 }
 
-section#createProject.inactive, section#createTask.inactive, section#settings.inactive{
+section#createProject.inactive, section#createTask.inactive, section#settings.inactive, section#projectView.inactive{
     display: none;
 }
 
-section#createProject.activ, section#createTask.active, section#settings.active{
+section#createProject.activ, section#createTask.active, section#settings.active, section#projectView.active{
     display: flex;
 }
 
@@ -782,4 +802,62 @@ li.project-type-item h5 {
     position: absolute;
     width: 8px;
     height: 8px;
+}
+
+.project-view-container .popup-header {
+    align-items: flex-start;
+}
+
+.project-view-container.popup-container{
+    width: 32%;
+}
+
+.project-view-tasks-header .progress-bar {
+    background: #f5f5f5;
+    height: 8px;
+    margin-top: 8px;
+}
+
+li.task-item.project-task-item {
+    background: #f5f5f5;
+}
+
+.project-view-tasks-header {
+    margin-bottom: 1em;
+}
+
+.project-view-tasks-header h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1c1c1c;
+}
+
+h3#projectViewTitle {
+    margin-bottom: 4px;
+}
+
+h3#projectViewTitle {
+    margin-bottom: 4px;
+}
+
+.project-view-container .project-details {
+    margin: 0;
+    margin-bottom: 1em;
+}
+
+.project-atts.row {
+    margin-bottom: 1em;
+}
+
+.project-view-container .popup-header {
+    margin-bottom: 8px;
+}
+
+.project-view button.btn.primary {
+    padding: 8px 24px;
+}
+
+.project-view .submit-container.field-container {
+    margin-bottom: 0;
+    margin-top: 2em;
 }
