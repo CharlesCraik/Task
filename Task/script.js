@@ -72,56 +72,6 @@ closeProjectLarge.addEventListener('click', function(){
     projectView.classList.add('inactive');
 });
 
-function openProject(id){
-    const projectTasks = document.querySelector('#projectContent');
-    projectView.classList.remove('inactive');
-    projectView.classList.add('active');
-    projectTasks.innerHTML = '';
-    projectTasks.innerHTML = `
-        <div class="project-details">
-        <div class="project-atts row">
-            <span class="attribute project-type" id="projectViewType">
-                Web Development
-            </span>
-            <span class="attribute project-status" id="projectViewStatus">
-                In Progress
-            </span>
-        </div>
-        <div class="project-description-container" id="projectViewDesc">
-            <p class="secondary-text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Phasellus quis ligula molestie justo facilisis pretium 
-                sed sit amet tortor. In at mauris a lorem 
-                condimentum dapibus.
-            </p>
-        </div>
-    </div>
-    <div class="project-view-tasks-container">
-        <div class="project-view-tasks-header">
-            <h4>Tasks</h4>
-            <div class="progress-bar" id="projectViewProgressBar">
-                <div class="progress-completion-rate"></div>
-            </div>
-        </div>
-        <ul class="project-view-tasks" id="projectTasklist">
-            <li class="task-item project-task-item">
-                <div class="task-details">
-                    <h5>Task Title</h5>
-                    <div class="task-data">
-                        <span class="task-due-date">Due: 1 Sept 2022</span>
-                    </div>
-                </div>
-                <label class="task-marker-container" data-key='${id}'>
-                    <input type="checkbox" class="task-marker">
-                    <span class="task-marker-display"><img src="media/check.svg"></span>
-                </label>
-                <button class="task-delete" id="deleteTask"><img src="media/cross.svg"></button>
-            </li>
-        </ul>
-    </div>
-    `;
-}
-
 
 //Create -- Project
 const projectForm = document.querySelector('#addProject');
@@ -497,8 +447,81 @@ function projectProgress(projects){
     });
 }
 
+function openProject(id){
+    const projectTasks = document.querySelector('#projectContent');
+    const projectTitle = document.querySelector('#projectViewTitle');
+    const projectDueDate = document.querySelector('#projectViewDate');
+    //Get Project
+    var project = projects.filter(p => p.id == id);
+    var projectColor = project.map(proj => proj.color);
 
+    projectView.classList.remove('inactive');
+    projectView.classList.add('active');
 
+    projectTitle.innerHTML = `${project.map(proj => proj.name)}`;
+    projectDueDate.innerHTML = `Due: ${project.map(proj => proj.due_date)}`;
+    projectTasks.innerHTML = '';
+    projectTasks.innerHTML = `
+        <div class="project-details">
+        <div class="project-atts row">
+            <span class="attribute project-type" id="projectViewType" style='background: ${projectColor}'>
+                Web Development
+            </span>
+            <span class="attribute project-status" id="projectViewStatus" style='background: ${projectColor}'>
+                In Progress
+            </span>
+        </div>
+        <div class="project-description-container" id="projectViewDesc">
+            <p class="secondary-text">
+                ${project.map(proj => proj.description)}
+            </p>
+        </div>
+    </div>
+    <div class="project-view-tasks-container">
+        <div class="project-view-tasks-header">
+            <h4>Tasks</h4>
+            <div class="progress-bar" id="projectViewProgressBar">
+                <div class="progress-completion-rate" style="width: ${project.map(proj => proj.progress)}%"></div>
+            </div>
+        </div>
+        <ul class="project-view-tasks" id="projectTasklist">
+    
+        </ul>
+    </div>
+    `;
+    
+    const projectTaskList = document.querySelector('#projectTasklist');
+    const tasksOfProject = tasks.filter(t => t.project == project.map(proj => proj.name));
+    projectTaskList.innerHTML = '';
 
+    tasksOfProject.forEach(function(projectTask){
+        console.table(projectTask);
+        var isComplete = projectTask.completed;
+        const t_li = document.createElement('li');
+        
+        t_li.setAttribute('class', 'task-item');
+        t_li.classList.add('project-task-item');
+        t_li.setAttribute('data-key', projectTask.due_date);
+        t_li.setAttribute('task-color', projectTask.color);
+        t_li.setAttribute('project-data', projectTask.project)
 
+        if(isComplete === true){
+            t_li.classList.add('task-complete');
+        }
 
+        t_li.innerHTML = `
+            <div class="task-details">
+                <h5>${projectTask.name}</h5>
+                <div class="task-data">
+                    <span class="task-due-date">Due: ${projectTask.due_date}</span>
+                </div>
+            </div>
+            <label class="task-marker-container" data-key='${projectTask.id}'>
+                
+                <span class="task-marker-display"><img src="media/check.svg"></span>
+            </label>
+            
+        `;
+        projectTaskList.prepend(t_li);
+    });
+}

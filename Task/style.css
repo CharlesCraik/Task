@@ -819,7 +819,7 @@ li.project-type-item h5 {
 }
 
 li.task-item.project-task-item {
-    background: #f5f5f5;
+    background: #f9f9f9;
 }
 
 .project-view-tasks-header {
@@ -860,4 +860,8 @@ h3#projectViewTitle {
 .project-view .submit-container.field-container {
     margin-bottom: 0;
     margin-top: 2em;
+}
+
+.project-task-item label.task-marker-container{
+    cursor: initial;
 }
