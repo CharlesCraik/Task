@@ -820,6 +820,8 @@ li.project-type-item h5 {
 
 li.task-item.project-task-item {
     background: #f9f9f9;
+    padding: 16px;
+    margin-bottom: 1em;
 }
 
 .project-view-tasks-header {
@@ -853,6 +855,12 @@ h3#projectViewTitle {
     margin-bottom: 8px;
 }
 
+.project-task-item h5 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
 .project-view button.btn.primary {
     padding: 8px 24px;
 }
@@ -862,6 +870,44 @@ h3#projectViewTitle {
     margin-top: 2em;
 }
 
-.project-task-item label.task-marker-container{
+.project-task-item label.task-marker-container {
     cursor: initial;
+    width: 36px;
+    height: 36px;
 }
+
+.project-task-item .task-details:before {
+    width: 6px;
+}
+
+ul#projectTasklist {
+    max-height: 406px;
+    overflow-y: scroll;
+    padding-right: 1em;
+}
+
+ul#projectTasklist::-webkit-scrollbar{
+    background: #f5f5f5;
+    border-radius: 50px;
+    width: 6px
+    
+}
+
+ul#projectTasklist::-webkit-scrollbar-thumb{
+    background: #1c1c1c;
+    border-radius: 50px;
+    height: auto;
+}
+
+li.menu-item {
+    margin-right: 1em;
+}
+
+li.menu-item:last-child {
+    margin: 0;
+}
+
+ul.main-menu.row {
+    flex-direction: row-reverse;
+}
+

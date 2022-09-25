@@ -95,7 +95,9 @@ const project = {
     color: '#eeeeee',
     tasks: 0,
     completedTasks: 0,
-    progress: 0
+    progress: 0,
+    status: 'Project Status',
+    set_status: false
 }
 
 projectForm.addEventListener('submit', function(event){
@@ -125,7 +127,9 @@ function addProject(p_name, p_type, p_dueDate, p_description, p_color){
             color: p_color,
             tasks: 0,
             completedTasks: 0,
-            progress: 0
+            progress: 0,
+            status: null,
+            set_status: false
         };
 
         projects.push(project);
@@ -181,7 +185,7 @@ function renderProjects(projects){
                         ${item.completedTasks}/${item.tasks} Tasks Complete
                     </span>
                     <span class="project-progress-status label-text">
-                        <i class="fa-solid fa-circle"></i> In Progress
+                        <i class="fa-solid fa-circle"></i> ${item.status}
                     </span>
                 </div>
             </div>
@@ -438,6 +442,25 @@ function addTaskToProject(projectName){
     });
 }
 
+function autoSetStatus(projects){
+    var projectNotStarted = 'Not Started';
+    var projectInProgress = 'In Progress';
+    var projectComplete = 'Complete';
+    projects.forEach(function(item){
+        if(item.completedTasks != 0 && item.completedTasks == item.tasks){
+            item.status = projectComplete;
+        }
+
+        if(item.completedTasks == 0){
+            item.status = projectNotStarted;
+        }
+
+        if(item.completedTasks != 0 && item.completedTasks != item.tasks){
+            item.status = projectInProgress;
+        }
+    });
+}
+
 function projectProgress(projects){
     projects.forEach(function(item){
         var completeTasks = item.completedTasks;
@@ -445,6 +468,7 @@ function projectProgress(projects){
         var progress = Math.round((completeTasks / totalTask) * 100);
         item.progress = progress;
     });
+    autoSetStatus(projects);
 }
 
 function openProject(id){
@@ -468,7 +492,7 @@ function openProject(id){
                 Web Development
             </span>
             <span class="attribute project-status" id="projectViewStatus" style='background: ${projectColor}'>
-                In Progress
+                ${project.map(proj => proj.status)}
             </span>
         </div>
         <div class="project-description-container" id="projectViewDesc">
