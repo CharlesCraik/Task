@@ -4,7 +4,6 @@ var date = new Date();
 var today = date.toDateString();
 dateDisplay.innerHTML = `${today}`;
 
-
 //Variables -- Creators
 const projectCreator = document.querySelector("#createProject")
 const taskCreator = document.querySelector('#createTask');
@@ -111,6 +110,13 @@ projectForm.addEventListener('submit', function(event){
         }
     });
     addProject(projectName.value, projectType.value, displayDueDate, projectDescription.value, projectColor);
+    
+    projectName.value = '';
+    projectType.placeholder = 'Select Project Type...';
+    projectDueDate.value = '';
+    projectDescription.value = '';
+    projectColors.value = '';
+
     projectCreator.classList.remove('active');
     projectCreator.classList.add('inactive');
 });
@@ -238,6 +244,12 @@ taskForm.addEventListener('submit', function(event){
     var due = new Date(taskDueDate.value);
     var taskDue = due.toDateString();
     addTask(taskName.value, taskProject.value, taskDue, taskDescription.value);
+    
+    taskName.value = '';
+    taskProject.placeholder = 'Select Project';
+    taskDueDate.value = '';
+    taskDescription.value = '';
+    
     taskCreator.classList.remove('active');
     taskCreator.classList.add('inactive');
     totalTaskProgressDisplay(tasks);
@@ -467,8 +479,11 @@ function projectProgress(projects){
         var totalTask = item.tasks;
         var progress = Math.round((completeTasks / totalTask) * 100);
         item.progress = progress;
+        if(item.set_status == false){
+            autoSetStatus(projects);
+        }
     });
-    autoSetStatus(projects);
+    //autoSetStatus(projects);
 }
 
 function openProject(id){
@@ -482,11 +497,13 @@ function openProject(id){
     projectView.classList.remove('inactive');
     projectView.classList.add('active');
 
+    projectTasks.setAttribute('data-type', `${project.map(proj => proj.id)}`);
+
     projectTitle.innerHTML = `${project.map(proj => proj.name)}`;
     projectDueDate.innerHTML = `Due: ${project.map(proj => proj.due_date)}`;
     projectTasks.innerHTML = '';
     projectTasks.innerHTML = `
-        <div class="project-details">
+    <div class="project-details">
         <div class="project-atts row">
             <span class="attribute project-type" id="projectViewType" style='background: ${projectColor}'>
                 Web Development
@@ -547,5 +564,31 @@ function openProject(id){
             
         `;
         projectTaskList.prepend(t_li);
+    });
+}
+
+const deleteProjectBtn = document.querySelector('#deleteProject');
+
+deleteProjectBtn.addEventListener('click', function(event){
+    var targetID = document.querySelector('#projectContent').getAttribute('data-type');
+    deleteProjectTasks(targetID);
+    deleteProject(targetID);
+});
+
+function deleteProject(id){
+    projects = projects.filter(function(item){
+        return item.id != id;
+    });
+    projectView.classList.remove('active');
+    projectView.classList.add('inactive');
+    saveProject(projects);
+}
+
+function deleteProjectTasks(id){
+    var project = projects.filter(p => p.id == id).map(proj => proj.name);
+    var targetProject = project.pop();
+    const tasksOfProject = tasks.filter(t => t.project == targetProject).map(t => t.id);
+    tasksOfProject.forEach(function(task){
+        deleteTask(task);
     });
 }

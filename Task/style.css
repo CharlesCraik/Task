@@ -911,3 +911,28 @@ ul.main-menu.row {
     flex-direction: row-reverse;
 }
 
+.clear-data-container.row{justify-content: space-between;}
+
+.project-view-container .submit-container.field-container {
+    flex-direction: row;
+    justify-content: center;
+}
+
+.project-view-container .submit-container.field-container .btn {
+    margin-right: 1em;
+}
+
+.project-view-container .submit-container.field-container .btn:last-child {
+    margin: 0;
+}
+
+button#deleteProject {
+    background: #FFA1A1;
+    border-color: #FFA1A1;
+    color: #1c1c1c;
+}
+
+button#deleteProject:hover{
+    background: #e78b8b;
+    border-color: #e78b8b;
+}

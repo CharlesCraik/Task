@@ -5,7 +5,7 @@
     <link rel="icon" type="image/x-icon" href="media/file.svg">
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/8f070deca5.js" crossorigin="anonymous"></script>
-  </head>
+    </head>
   <body>
     <header class="header-wrap">
         <section class="navigation row">
@@ -17,9 +17,10 @@
             <div class="nav-bar">
                 <ul class="main-menu row">
                     <li class="menu-item"><a href='#' id="openSettings">Settings</a></li>
-                    <li class="menu-item"><a href='#' id="openAttributes">Attributes</a></li>
-                    <li class="menu-item"><a href='#' id="openTaskPage">Tasks</a></li>
-                    <li class="menu-item"><a href='#' id="openProjectPage">Projects</a></li>
+                    <li class="menu-item"><a href='attributes.html' id="openAttributes">Attributes</a></li>
+                    <li class="menu-item"><a href='tasks.html' id="openTaskPage">Tasks</a></li>
+                    <li class="menu-item"><a href='projects.html' id="openProjectPage">Projects</a></li>
+                    <li class="menu-item"><a href='index.html' id="openDashboard">Dashboard</a></li>
                 </ul>
             </div>
         </section>
@@ -187,7 +188,7 @@
                 <div class="field-container task-project">
                     <label>Project</label>
                     <select id="taskProjectInput" placeholder="Select project...">
-                        <option value="">Select Project</option>
+                        <option value="Select Project">Select Project</option>
                     </select>
                 </div>
                 <div class="field-container task-due-date">
@@ -209,6 +210,10 @@
             <div class="popup-header">
                 <h3>Settings</h3>
                 <img class="close-btn" src="media/Cross.svg">
+            </div>
+            <div class="clear-data-container row">
+                <h5>Reset my data</h5>
+                <button class="btn primary" onClick="clearData()">Reset Data</button>
             </div>
             <!--<div class="project-type-display">
                 <form class="project-type-form" id="newType">
@@ -286,6 +291,7 @@
             </div>
             <div class="submit-container field-container">
                 <button class="btn primary" id="closeProjectBtn">Close</button>
+                <button class="btn primary" id="deleteProject">Delete Project</button>
             </div>
         </div>
     </section>
