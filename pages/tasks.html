@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Task</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="/style/util/iconsax-css/style.css">
+        <link rel="stylesheet" href="/style/style.css">
+    </head>
+    <body>
+        <section class='main-viewport row'>
+            <header class="main-nav-wrap">
+                <nav class="nav-container">
+                    <ul class="main-menu column">
+                        <li class="menu-item">
+                            <a href="/" class="icon-link">
+                                <i class="isax isax-element-45"></i>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="tasks.html" class="icon-link active">
+                                <i class="isax isax-task-square5"></i>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#" class="icon-link">
+                                <i class="isax isax-archive-24"></i>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#" class="icon-link">
+                                <i class="isax isax-graph5"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+            <section class="content-viewport">
+                <div class="content-viewport-header row stretch">
+                    <h1>Your Tasks</h1>
+                    <div class="user-display-container row">
+                        <button class="BTN option" id="darkMode"><i class='isax isax-moon5'></i></button>
+                        <div class="user-info-container row align-c">
+                            <span class="user-info-name">John Smith</span>
+                            <div class="user-info-avatar"></div>                          
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-toolbar row align-c stretch">
+                    <div class="toolbar-filtering">
+                        <input type="text" class="search-bar" id="searchTasks" placeholder="Search tasks...">
+                    </div>
+                    <div class="toolbar-additional">
+                        <button class="BTN primary" id="newTask">New Task</button>
+                    </div>
+                </div>
+                <div class="display-port-wrap row">
+                    <div class="workspace-wrap">
+                        <ul class="taskAnalytics row">
+                            <div class="analytic-card column">
+                                <div class="analytic-card-icon">
+                                    <i class="isax isax-task-square5"></i>
+                                </div>
+                                <div class="analytic-card-data">
+                                    <span class="analytic-data" id="analytic_upcomingTasks">16</span>
+                                    <span class="analytic-subtitle">Upcoming Tasks</span>
+                                </div>
+                            </div>
+                            <div class="analytic-card column">
+                                <div class="analytic-card-icon">
+                                    <i class="isax isax-info-circle5"></i>
+                                </div>
+                                <div class="analytic-card-data">
+                                    <span class="analytic-data" id="analytic_priorityTasks">2</span>
+                                    <span class="analytic-subtitle">Priority Tasks</span>
+                                </div>
+                            </div>
+                            <div class="analytic-card column">
+                                <div class="analytic-card-icon">
+                                    <i class="isax isax-tick-circle5"></i>
+                                </div>
+                                <div class="analytic-card-data">
+                                    <span class="analytic-data" id="analytic_completedTasks">8</span>
+                                    <span class="analytic-subtitle">Completed Tasks</span>
+                                </div>
+                            </div>
+                            <div class="analytic-card column">
+                                <div class="analytic-card-icon">
+                                    <i class="isax isax-tick-circle5"></i>
+                                </div>
+                                <div class="analytic-card-data">
+                                    <span class="analytic-data" id="analytic_completedTasks">8</span>
+                                    <span class="analytic-subtitle">Completed Tasks</span>
+                                </div>
+                            </div>
+                        </ul>
+                        <div class="current-tasks-wrap row">
+                            <div class="current-tasks-container column">
+                                <h3>Upcoming Tasks</h3>
+                                <ul class="upcoming-tasks column" id="feed_upcomingTasks">
+                                    <span class="warning">You currently have no upcoming tasks</span>
+                                </ul>   
+                            </div>
+                            <div class="current-tasks-container column">
+                                <h3>Priority Tasks</h3>
+                                <ul class="upcoming-tasks column" id="feed_priorityTasks">
+                                    <span class="warning">You currently have no priority tasks</span>
+                                </ul>   
+                            </div>
+                        </div>
+                    </div>
+                    <div class="completed-tasks-container column">
+                        <h3>Completed Tasks</h3>
+                        <ul class="completed-tasks column" id="feed_completedTasks">
+                            <span class="warning">You currently have no completed tasks</span>
+                        </ul>
+                    </div>
+                </div> 
+            </section>
+            <section class="interactive-viewport inactive" id="interactivePanel">
+                <div class="interactive-wrap new-task-display inactive" id="newTaskEditor">
+                    <h3 class="form-title">Create a new task</h3>
+                    <form class="global-form" id="newTaskForm">
+                        <div class="field-container">
+                            <label>Title</label>
+                            <input type="text" class="light" id="f_taskTitle" placeholder="Enter task title...">
+                        </div>
+                        <div class="field-row">
+                            <div class="field-container">
+                                <label>Related Project</label>
+                                <select class="light" placeholder="Select project..." id="f_taskProject">
+                                    <option disabled selected hidden class="default-option">Select project...</option>
+                                    <option value="Project Test">Project Test</option>
+                                </select>
+                            </div>
+                            <div class="field-container">
+                                <label>Status</label>
+                                <select class="light" placeholder="Select status..." id="f_taskStatus">
+                                    <option disabled selected hidden class="default-option">Select status...</option>
+                                    <option value="Queued">Queued</option>
+                                    <option value="In progress">In progress</option>
+                                    <option value="Priority">Priority</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="field-container">
+                            <label>Task Deadline</label>
+                            <input type="date" class="light" id="f_taskDeadline" placeholder="Select deadline...">
+                        </div>
+                        <div class="field-container textarea-container">
+                            <label>Notes</label>
+                            <!-- <textarea rows="4" cols="50" class="light" id="f_taskNotes" placeholder="Enter notes..."></textarea> -->
+                            <input type="text" class="light" id="f_taskNotes" placeholder="Enter task notes...">
+                        </div>
+                        <div class="button-container">
+                            <button class="BTN primary" id="createTask" type="submit">Create Task</button>
+                            <a class="BTN secondary cancel-task" id="cancelTask">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="interactive-wrap update-task-display inactive" id="updateTaskEditor">
+                    <h3 class="form-title">Update task</h3>
+                    <form class="global-form" id="updateTaskForm">
+                        <div class="field-container">
+                            <label>Title</label>
+                            <input type="text" class="light" id="f2_taskTitle" placeholder="Enter task title...">
+                        </div>
+                        <div class="field-container">
+                            <label>Status</label>
+                            <select class="light" placeholder="Select status..." id="f2_taskStatus">
+                                <option disabled selected hidden class="default-option">Select status...</option>
+                                <option value="Queued">Queued</option>
+                                <option value="In progress">In progress</option>
+                                <option value="Priority">Priority</option>
+                            </select>
+                        </div>
+                        <div class="field-container">
+                            <label>Task Deadline</label>
+                            <input type="date" class="light" id="f2_taskDeadline" placeholder="Select deadline...">
+                        </div>
+                        <div class="field-container textarea-container">
+                            <label>Notes</label>
+                            <!-- <textarea rows="4" cols="50" class="light" id="f_taskNotes" placeholder="Enter notes..."></textarea> -->
+                            <input type="text" class="light" id="f2_taskNotes" placeholder="Enter task notes...">
+                        </div>
+                        <div class="button-container">
+                            <button class="BTN primary" id="upateTask" type="submit">Update Task</button>
+                            <a class="BTN secondary cancel-task" id="f2_cancelTask">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </section>
+        <script src="/scripts/js/display-logic.js"></script>
+        <script type="module" src="/scripts/js/task-control.js"></script>
+    </body>
+</html>
