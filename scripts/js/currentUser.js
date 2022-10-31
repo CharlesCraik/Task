@@ -11,7 +11,8 @@ var thisUser = [];
 
 getUser().then((user) => {
     if(user == null){
-        window.location.href = "/pages/sign-up.html";
+        //window.location.href = "/pages/sign-up.html";
+        console.log('No user found');
     }
     else{
         thisUser = user;
