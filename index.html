@@ -2,10 +2,12 @@
 <html>
     <head>
         <title>Task</title>
+        <link rel="icon" type="image/x-icon" href="./media/icons/file.svg">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="style/util/iconsax-css/style.css">
-        <link rel="stylesheet" href="style/style.css">
-        <script type="module" src="src/index.js"></script>
+        <link rel="stylesheet" href="./style/util/iconsax-css/style.css">
+        <link rel="stylesheet" href="./style/style.css">
+        <script type="module" src="./src/index.js"></script>
+        <script type="module" src="./scripts/js/currentUser.js"></script>
     </head>
     <body>
         <section class='main-viewport row'>
@@ -13,12 +15,12 @@
                 <nav class="nav-container">
                     <ul class="main-menu column">
                         <li class="menu-item">
-                            <a href="index.html" class="icon-link active">
+                            <a href="./index.html" class="icon-link active">
                                 <i class="isax isax-element-45"></i>
                             </a>
                         </li>
                         <li class="menu-item">
-                            <a href="pages/tasks.html" class="icon-link">
+                            <a href="./pages/tasks.html" class="icon-link">
                                 <i class="isax isax-task-square5"></i>
                             </a>
                         </li>
@@ -28,7 +30,7 @@
                             </a>
                         </li>
                         <li class="menu-item">
-                            <a href="#" class="icon-link">
+                            <a href="./pages/analytics.html" class="icon-link">
                                 <i class="isax isax-graph5"></i>
                             </a>
                         </li>
@@ -41,33 +43,39 @@
                     <div class="project-stage-filter-container row">
                         <ul class="project-stage-filters row">
                             <li class="project-stage-filter-item">
-                                <a href="#" class="active">All</a>
+                                <a class="active" id="allProjectsFilter">All</a>
                             </li>
                             <li class="project-stage-filter-item">
-                                <a href="#">In Progress</a>
+                                <a id="notStartedProjectsFilter">Not Started</a>
                             </li>
                             <li class="project-stage-filter-item">
-                                <a href="#">Complete</a>
+                                <a id="inProgressProjectsFilter">In Progress</a>
                             </li>
                             <li class="project-stage-filter-item">
-                                <a href="#">On Hold</a>
+                                <a href="#" id="completeProjectsFilter">Complete</a>
                             </li>
                             <li class="project-stage-filter-item">
-                                <a href="#">Archived</a>
+                                <a id="onHoldProjectsFilter">On Hold</a>
+                            </li>
+                            <li class="project-stage-filter-item">
+                                <a id="archivedProjectsFilter">Archived</a>
                             </li>
                         </ul>
                     </div>
                     <div class="user-display-container row">
                         <button class="BTN option" id="darkMode"><i class='isax isax-moon5'></i></button>
                         <div class="user-info-container row align-c">
-                            <span class="user-info-name">John Smith</span>
+                            <span class="user-info-name" id="displayUserInfo_name"></span>
                             <div class="user-info-avatar"></div>                          
                         </div>
                     </div>
                 </div>
                 <div class="dashboard-toolbar row align-c stretch">
                     <div class="toolbar-filtering">
-                        <input type="text" class="search-bar" id="searchProjects" placeholder="Search projects...">
+                        <form id="searchProjectsForm">
+                            <input type="text" class="search-bar" id="searchProjects" placeholder="Search projects...">
+                        </form>
+                        <button class="BTN option" id="refreshProjects"><i class="isax isax-refresh5"></i></button>
                     </div>
                     <div class="toolbar-additional">
                         <button class="BTN primary" id="newProject">New Project</button>
@@ -265,7 +273,7 @@
                 </div>
             </section>
         </section>
-        <script src="scripts/js/display-logic.js"></script>
-        <script type="module" src="scripts/js/project-control.js"></script>
+        <script src="./scripts/js/display-logic.js"></script>
+        <script type="module" src="./scripts/js/project-control.js"></script>
     </body>
 </html>

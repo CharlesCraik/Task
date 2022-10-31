@@ -2,9 +2,11 @@
 <html>
     <head>
         <title>Task</title>
+        <link rel="icon" type="image/x-icon" href="../media/icons/file.svg">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="/style/util/iconsax-css/style.css">
-        <link rel="stylesheet" href="/style/style.css">
+        <link rel="stylesheet" href="../style/util/iconsax-css/style.css">
+        <link rel="stylesheet" href="../style/style.css">
+        <script type="module" src="../scripts/js/currentUser.js"></script>
     </head>
     <body>
         <section class='main-viewport row'>
@@ -17,7 +19,7 @@
                             </a>
                         </li>
                         <li class="menu-item">
-                            <a href="tasks.html" class="icon-link active">
+                            <a href="./tasks.html" class="icon-link active">
                                 <i class="isax isax-task-square5"></i>
                             </a>
                         </li>
@@ -27,7 +29,7 @@
                             </a>
                         </li>
                         <li class="menu-item">
-                            <a href="#" class="icon-link">
+                            <a href="./analytics.html" class="icon-link">
                                 <i class="isax isax-graph5"></i>
                             </a>
                         </li>
@@ -40,14 +42,16 @@
                     <div class="user-display-container row">
                         <button class="BTN option" id="darkMode"><i class='isax isax-moon5'></i></button>
                         <div class="user-info-container row align-c">
-                            <span class="user-info-name">John Smith</span>
+                            <span class="user-info-name" id="displayUserInfo_name"></span>
                             <div class="user-info-avatar"></div>                          
                         </div>
                     </div>
                 </div>
                 <div class="dashboard-toolbar row align-c stretch">
                     <div class="toolbar-filtering">
-                        <input type="text" class="search-bar" id="searchTasks" placeholder="Search tasks...">
+                        <form id="searchTasksForm">
+                            <input type="text" class="search-bar" id="searchTasks" placeholder="Search tasks...">
+                        </form>
                     </div>
                     <div class="toolbar-additional">
                         <button class="BTN primary" id="newTask">New Task</button>
@@ -94,13 +98,13 @@
                             </div>
                         </ul>
                         <div class="current-tasks-wrap row">
-                            <div class="current-tasks-container column">
+                            <div class="current-tasks-container task-feed column">
                                 <h3>Upcoming Tasks</h3>
                                 <ul class="upcoming-tasks column" id="feed_upcomingTasks">
                                     <span class="warning">You currently have no upcoming tasks</span>
                                 </ul>   
                             </div>
-                            <div class="current-tasks-container column">
+                            <div class="current-tasks-container task-feed column">
                                 <h3>Priority Tasks</h3>
                                 <ul class="upcoming-tasks column" id="feed_priorityTasks">
                                     <span class="warning">You currently have no priority tasks</span>
@@ -108,7 +112,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="completed-tasks-container column">
+                    <div class="completed-tasks-container task-feed column">
                         <h3>Completed Tasks</h3>
                         <ul class="completed-tasks column" id="feed_completedTasks">
                             <span class="warning">You currently have no completed tasks</span>
@@ -191,7 +195,7 @@
                 </div>
             </section>
         </section>
-        <script src="/scripts/js/display-logic.js"></script>
-        <script type="module" src="/scripts/js/task-control.js"></script>
+        <script src="../scripts/js/display-logic.js"></script>
+        <script type="module" src="../scripts/js/task-control.js"></script>
     </body>
 </html>

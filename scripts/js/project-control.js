@@ -8,7 +8,7 @@ async function getProjects() {
 }
 
 async function getTasks() {
-    const { data, error } = await supabase.from('Tasks').select('*')
+    const { data, error } = await supabase.from('Tasks').select('*');
     return data
 }
 
@@ -25,10 +25,18 @@ async function addProjectToDB(p_title, p_type, p_status, p_startDate, p_deadline
         project_url: p_url,
         project_description: p_description,
         project_color: p_color,
-        project_icon: p_icon
+        project_icon: p_icon,
+        project_all_tasks: [],
     }])
     return data
 }
+
+const refreshProjects = document.querySelector('#refreshProjects');
+
+refreshProjects.addEventListener('click', function(event){
+    event.preventDefault();
+    initProjects(projects);
+});
 
 // stage 1 : project creation
 const projectForm = document.querySelector('#newProjectForm');
@@ -47,27 +55,29 @@ const projectsFeed = document.querySelector('#feed_projects');
 let projects = [];
 let tasks = [];
 
-getProjects().then((data) => {
-    console.log('Converting...');
-    if(data.length >= 1){
-    data.forEach(function(item){
-        projects.push(item);
-    });
-    //console.table(projects);
-    initProjects(projects);
-    }
-});
+var taskCount = 0;
+var projectCount = 0;
 
 getTasks().then((data) => {
-    console.log('Converting...');
+    console.log('Converting tasks...');
     if(data.length >= 1){
     data.forEach(function(item){
         tasks.push(item);
+        taskCount = taskCount + 1;
     });
-    console.table(tasks);
     }
 });
 
+getProjects().then((data) => {
+    console.log('Converting projects...');
+    if(data.length >= 1){
+    data.forEach(function(item){
+        projects.push(item);
+        projectCount = projectCount + 1;
+    });
+    setTimeout(function(){ initProjects(projects); }, 200);
+    }
+});
 
 
 projectForm.addEventListener('submit', function(event){
@@ -132,23 +142,92 @@ function createProject(p_title, p_type, p_status, p_startDate, p_deadline, p_url
             project_url: p_url,
             project_description: p_description,
             project_color: p_color,
-            project_icon: p_icon
+            project_icon: p_icon,
+            project_all_tasks: [],
         };
 
         projects.push(project);
         initProjects(projects);
     }
 }
-
 // stage 2 : initiate projects
+const allProjects = document.querySelector('#allProjectsFilter');
+const notStartedProjects = document.querySelector('#notStartedProjectsFilter');
+const inProgressProjects = document.querySelector('#inProgressProjectsFilter');
+const completeProjects = document.querySelector('#completeProjectsFilter');
+const onHoldProjects = document.querySelector('#onHoldProjectsFilter');
+const archivedProjects = document.querySelector('#archivedProjectsFilter'); 
+const projectFilters = document.querySelectorAll('li.project-stage-filter-item a');
+
+const projectSearchForm = document.querySelector('#searchProjectsForm');
+const projectSearchInput = document.querySelector('#searchProjects');
+
+projectSearchForm.addEventListener('submit', function(event){
+    event.preventDefault();
+    if(projectSearchInput.value != ''){
+        const searchedProjects = projects.filter(item => item.project_title == projectSearchInput.value);
+        initProjects(searchedProjects);
+    }
+    else{
+        initProjects(projects);
+    }
+});
+
+projectFilters.forEach(function(item){
+    item.addEventListener('click', function(event){
+        event.preventDefault();
+        projectFilters.forEach(function(filter){
+            if(filter.classList.contains('active')){
+                filter.classList.remove('active');
+            }
+        });
+        item.classList.add('active');
+        initProjects(projects);
+    });
+});
+
+
+
+function filterProjects(items){
+    if(allProjects.classList.contains('active')){
+        return items;
+    }
+    else if(notStartedProjects.classList.contains('active')){
+        return items.filter(item => item.project_status == 'Not started');
+    }
+    else if(inProgressProjects.classList.contains('active')){
+        return items.filter(item => item.project_status == 'In progress');
+    }
+    else if(completeProjects.classList.contains('active')){
+        return items.filter(item => item.project_status == 'Complete');
+    }
+    else if(onHoldProjects.classList.contains('active')){
+        return items.filter(item => item.project_status == 'On hold');
+    }
+    else if(archivedProjects.classList.contains('active')){
+        return items.filter(item => item.project_status == 'Archived');
+    }
+}
+
 function initProjects(items){
+    console.log('Initialising projects...');
     projectsFeed.innerHTML = '';
 
-    items.forEach(function(item){
+    const query = filterProjects(items);
+
+    query.forEach(function(item){
+        const projectProgress = getProjectProgress(item.id);
         const projectItem = document.createElement('li');
 
         projectItem.setAttribute('class', 'project-item');
         projectItem.setAttribute('data-key', item.id);
+
+        var dateRaw = Date.now();
+        var deadline = new Date(item.project_deadline);
+        var date = new Date(dateRaw);
+        var diff = deadline.getTime() - date.getTime();
+        var daydiff = Math.round(diff / (1000 * 60 * 60 * 24));
+
 
         projectItem.innerHTML = `
         <div class="project-header row">
@@ -176,13 +255,13 @@ function initProjects(items){
         </div>
         <div class="project-progress column">
             <div class="project-progress-bar-container">
-                <div class="project-progress-bar-completion">
+                <div class="project-progress-bar-completion" style="width: ${projectProgress}%">
 
                 </div>
             </div>
             <div class="project-progress-details row">
                 <span class="project-days-left">
-                    00 Days Left
+                    ${daydiff} Days Left
                 </span>
                 <span class="projct-status row align-c">
                     <span class="project-status-indicator"></span>
@@ -208,7 +287,7 @@ function initProjects(items){
         projectsFeed.prepend(projectItem);
     });
 
-    if(projects.length == 0){
+    if(query.length == 0){
         projectsFeed.innerHTML = '<span class="warning">You currently have no projects</span>';
     }
 }
@@ -226,6 +305,14 @@ projectsFeed.addEventListener('click', function(event){
 });
 
 async function deleteProject(id){
+    const thisProject = projects.find(item => item.id == id);
+    const projectTasks = thisProject.project_all_tasks;
+    
+    projectTasks.forEach(function(item){
+        const task = tasks.find(target => target.id == item);
+        deleteTask(task.id);
+    });
+
     const { error } = await supabase.from('Projects').delete().eq('id', id);
 
     projects = projects.filter(function(item){
@@ -307,3 +394,40 @@ async function updateProjectDB(id, p_title, p_type, p_status, p_startDate, p_dea
     }).match({ id: id });
     return data
 }
+
+
+// stage 4 : project stats
+function getProjectProgress(id){
+    const thisProject = projects.find(item => item.id == id);
+    const projectTasks = thisProject.project_all_tasks;
+    
+    var totalTasks = projectTasks.length;
+    var completedTasks = 0;
+    
+    var thisProgress = 0;
+    
+    projectTasks.forEach(function(item){
+        const task = tasks.find(target => target.id == item);
+        if(task.task_done == true){
+            completedTasks = completedTasks + 1;
+        }
+    });
+    
+    if(totalTasks == 0){
+       thisProgress = 0; 
+    }
+    else{
+        thisProgress = (completedTasks / totalTasks) * 100;
+    }
+
+    //console.log(thisProject.project_title + "'s progress is: " + thisProgress + '%');
+    return thisProgress;
+
+}
+
+async function deleteTask(id){
+    const { error } = await supabase.from('Tasks').delete().eq('id', id);
+}
+
+
+

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Task</title>
+        <link rel="icon" type="image/x-icon" href="../media/icons/file.svg">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="../style/util/iconsax-css/style.css">
+        <link rel="stylesheet" href="../style/style.css">
+    </head>
+    <body>
+        <section class="main-viewport">
+            <section class="split-viewport row">
+                <button class="BTN option" id="darkMode"><i class='isax isax-moon5'></i></button>
+                <div class="user-actions split-col">
+                    <div class="action-wrap">
+                        <div class="create-account-container action-container" id="createAccountContainer">
+                            <div class="action-info">
+                                <h1>Sign Up</h1>
+                                <span class="subtitle">Create an account for free!</span>
+                            </div>
+                            <form id="createAccountForm">
+                                <div class="field-row">
+                                    <div class="field-container">
+                                        <label>First Name</label>
+                                        <input type="text" class="light" id="newUser_firstName" placeholder="Enter your first name...">
+                                    </div>
+                                    <div class="field-container">
+                                        <label>Last Name</label>
+                                        <input type="text" class="light" id="newUser_lastName" placeholder="Enter your last name...">
+                                    </div>
+                                </div>
+                                <div class="field-container">
+                                    <label>Email</label>
+                                    <input type="email" class="light" id="newUser_email" placeholder="Enter your email...">
+                                </div>
+                                <div class="field-container">
+                                    <label>Password</label>
+                                    <input type="password" class="light" id="newUser_password" placeholder="Create a password...">
+                                </div>
+                                <button class="BTN primary" id="createAccount" type="submit">Create Account</button>
+                            </form>
+                        </div>
+                        <!-- <div class="sign-in-container action-container" id="signInContainer">
+
+                        </div> -->
+                    </div>
+                </div>
+                <div class="site-info split-col">
+                    
+                </div>
+            </section>
+        </section>
+        <script src="../scripts/js/display-logic.js"></script>
+        <script type="module" src="../scripts/js/auth.js"></script>
+    </body>
+</html>

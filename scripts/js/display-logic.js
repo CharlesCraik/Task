@@ -9,6 +9,30 @@ colorInput.forEach(function(item){
     item.style.background = color;
 });
 
+// dark and light mode
+const modeInit = document.querySelector('#darkMode');
+var darkModeEngaged = 0;
+
+modeInit.addEventListener('click', function(event){
+    if(darkModeEngaged == 0){
+        document.body.classList.add('darkMode');
+        darkModeEngaged = 1;
+        localStorage.setItem("darkMode", darkModeEngaged);
+    }
+    else if(darkModeEngaged == 1){
+        document.body.classList.remove('darkMode');
+        darkModeEngaged = 0;
+        localStorage.setItem("darkMode", darkModeEngaged);
+    }
+});
+localStorage.getItem("darkMode");
+if(localStorage.getItem("darkMode") == 1){
+    document.body.classList.add('darkMode');
+}
+else if(localStorage.getItem("darkMode") == 0){
+    document.body.classList.remove('darkMode');
+}
+
 // select placeholder
 const selectInput = document.querySelectorAll('select.place_holder');
 

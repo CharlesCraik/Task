@@ -13,11 +13,11 @@ async function getProjects() {
     return data
 }
 
-async function addTaskToDB(t_title, t_status, t_og_status, t_deadline, t_notes, t_task_done, t_project, t_project_id, t_color) {
+async function addTaskToDB(id, t_title, t_status, t_og_status, t_deadline, t_notes, t_task_done, t_project, t_project_id, t_color) {
     const { data, error } = await supabase
       .from('Tasks')
       .insert([{ 
-        id: Date.now(),
+        id: id,
         task_title: t_title,
         task_status: t_status,
         task_og_status: t_og_status,
@@ -106,17 +106,17 @@ function populateTaskProjects(projects){
 
 function createTask(t_title, t_project, t_status, t_deadline, t_notes){
     console.log(t_title, t_project, t_status, t_deadline, t_notes);
-
+    var newID = Date.now();
     var taskProject = projects.find(item => item.project_title == t_project);
     var projectName = taskProject.project_title;
     var projectID = taskProject.id;
     var projectColor = taskProject.project_color;
 
-    addTaskToDB(t_title, t_status, t_status, t_deadline, t_notes, false, projectName, projectID, projectColor);
+    addTaskToDB(newID, t_title, t_status, t_status, t_deadline, t_notes, false, projectName, projectID, projectColor);
 
     if(t_title !== ''){
         const task = {
-            id: Date.now(),
+            id: newID,
             task_title: t_title,
             task_status: t_status,
             task_og_status: t_status,
@@ -128,9 +128,25 @@ function createTask(t_title, t_project, t_status, t_deadline, t_notes){
             task_color: projectColor
         };
 
+        console.log(task.id + " " + task.task_project_id + " " + task.task_project);
+        assignTaskToProject(task.id, task.task_project_id);
+
         tasks.push(task);
         initTasks(tasks);
     }
+}
+
+async function assignTaskToProject(taskID, projectID){
+    const task = tasks.find(x => x.id == taskID);
+    const project = projects.find(x => x.id == projectID);
+    const projectTasks = project.project_all_tasks;
+    projectTasks.push(taskID);
+    console.log(projectTasks);
+
+    const { data, error } = await supabase.from('Projects').update({
+        project_all_tasks: projectTasks
+    }).match({ id: project.id });
+    return data
 }
 
 
@@ -398,6 +414,21 @@ function initTasks(tasks){
     initCompleteTasks(tasks);
 }
 
+// search tasks
+const searchTasksForm = document.querySelector('#searchTasksForm');
+const searchTasks = document.querySelector('#searchTasks');
+
+searchTasksForm.addEventListener('submit', function(event){
+    event.preventDefault();
+    if(searchTasks.value != ''){
+        const searchedTasks = tasks.filter(item => item.task_title == searchTasks.value);
+        initTasks(searchedTasks);
+    }
+    else{
+        initTasks(tasks);
+    }
+});
+
 
 // task behaviour
 upcomingTaskFeed.addEventListener('click', function(event){
@@ -469,7 +500,7 @@ priorityTaskFeed.addEventListener('click', function(event){
         tab.classList.add('active');
     }
 
-    if(event.target.classList.contains('task-delete')){
+    if(event.target.classList.contains('delete-task')){
         var id = event.target.closest('[data-key]').getAttribute('data-key');
         console.log('Deleting: ' + id);
         deleteTask(id);
@@ -516,7 +547,7 @@ completedTaskFeed.addEventListener('click', function(event){
         tab.classList.add('active');
     }
 
-    if(event.target.classList.contains('task-delete')){
+    if(event.target.classList.contains('delete-task')){
         var id = event.target.closest('[data-key]').getAttribute('data-key');
         console.log('Deleting: ' + id);
         deleteTask(id);
@@ -556,6 +587,14 @@ async function deleteTask(id){
     const { error } = await supabase.from('Tasks').delete().eq('id', id);
     
     tasks = tasks.filter(function(item){
+        if(item.id == id){
+            console.log('Part of ' + item.task_project_id + ' ' + item.task_project);
+            const project = projects.find(x => x.id == item.task_project_id);
+            const projectTasks = project.project_all_tasks;
+            const updatedTaskList = projectTasks.filter(i => i != id);
+            
+            deleteTaskFromProject(updatedTaskList, project.id);
+        }
         return item.id != id;
     });
     initTasks(tasks);
@@ -619,6 +658,13 @@ async function updateTaskDB(id, t_title, t_status, t_og_status, t_deadline, t_no
     }).match({ id: id });
     return data
 }
+
+async function deleteTaskFromProject(taskList, projectID){
+    const { data, error } = await supabase.from('Projects').update({
+        project_all_tasks: taskList
+    }).match({ id: projectID });
+}
+
 
 
 

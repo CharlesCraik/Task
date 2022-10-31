@@ -24,6 +24,10 @@ body{
     line-height: 1.5;
 }
 
+.darkMode *, body * {
+    transition: color .05s, background .05s;
+}
+
 ul ol, ul li{
     list-style: none;
 }
@@ -277,6 +281,12 @@ label.f-project-icon {
 
 .button-container > .BTN:last-child {
     margin: 0;
+}
+
+a.field-link {
+    text-align: right;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 
@@ -706,6 +716,7 @@ li.project-stage-filter-item a {
     border-radius: 50px;
     font-weight: 500;
     font-size: 14px;
+    cursor: pointer;
 }
 
 li.project-stage-filter-item a:hover{
@@ -841,11 +852,11 @@ span.analytic-subtitle {
 }
 
 .upcoming-tasks > span.warning {
-    max-height: 200px;
+    max-height: 75vh;
 }
 
 .completed-tasks > span.warning {
-    max-height: 419px;
+    max-height: 75vh;
 }
 
 li.project-item.editing .project-option-menu {
@@ -869,6 +880,83 @@ li.project-item .project-option-menu {
 
 .current-tasks-container h3 {
     margin-bottom: 16px;
+}
+
+.task-feed{
+    min-height: 74vh;
+}
+
+.projects-wrap span.warning {
+    width: 100%;
+}
+
+.toolbar-filtering button#refreshProjects {
+    font-size: 22px;
+    padding: 22px;
+    border-radius: 8px;
+    margin-left: 1em;
+    background: #e9e9e9;}
+
+.toolbar-filtering {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.toolbar-filtering button#refreshProjects:hover {
+    background: #1c1c1c;
+}
+
+.darkMode .toolbar-filtering button#refreshProjects {
+    background: #1c1c1c;
+}
+
+.darkMode .toolbar-filtering button#refreshProjects:hover {
+    background: #444;
+}
+
+.split-col {
+    width: 50%;
+}
+
+section.split-viewport {
+    height: 100%;
+}
+
+.user-actions.split-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+}
+
+.site-info.split-col {
+    background: #1c1c1c;
+}
+
+.action-wrap {
+    width: 64%;
+}
+
+.action-info > h1 {
+    font-size: 3em;
+}
+
+span.subtitle {
+    font-size: 1.2em;
+    color: #c9c9c9;
+}
+
+.action-info {
+    margin-bottom: 2em;
+}
+
+button#createAccount {
+    margin-top: 1em;
+}
+
+.split-viewport #darkMode{
+    display: none;
 }
 
 
@@ -904,6 +992,259 @@ div#newProjectEditor.active, div#updateProjectEditor.active, div#newTaskEditor.a
 li.task-item.editing .task-option-menu-container{
     display: block;
 }
+
+form#searchProjectsForm, form#searchTasksForm {
+    display: flex;
+    width: 80%;
+}
+
+button#signIn {
+    width: 28%;
+}
+
+button#createAccountInit {
+    margin-left: 1em;
+}
+
+.auth-footer {
+    margin-top: 2em;
+}
+
+span.pointer {
+    font-weight: 500;
+}
+
+
+/* darkMode */
+.darkMode .user-actions.split-col {
+    background: #1c1c1c;
+}
+
+.darkMode form#createAccountForm label {
+    color: #fafafa;
+}
+
+.darkMode .site-info.split-col {
+    background: #1a1a1a;
+}
+
+.darkMode header.main-nav-wrap {
+    background: #1c1c1c;
+}
+
+.darkMode .menu-item > a.active, .darkMode .menu-item > a:hover {
+    background: #111;
+    color: #fff;
+}
+
+.darkMode .menu-item > a {
+    color: #444;
+}
+
+.darkMode section.content-viewport {
+    background: #111;
+}
+
+.darkMode h1 {
+    color: #fafafa;
+}
+
+.darkMode input.search-bar {
+    background: #1c1c1c;
+    color: #444;
+}
+
+.darkMode input.search-bar::placeholder {
+    color: #444;
+}
+
+.darkMode li.project-stage-filter-item a.active {
+    background: #444;
+}
+
+.darkMode li.project-stage-filter-item a {
+    background: #1c1c1c;
+    color: #fafafa;
+}
+
+.darkMode li.project-stage-filter-item a:hover {
+    background: #444;
+}
+
+.darkMode .BTN.option {
+    background: #1c1c1c;
+    color: #fafafa;
+}
+
+.darkMode span.user-info-name {
+    color: #fafafa;
+}
+
+.darkMode .user-info-avatar {
+    background: #1c1c1c;
+}
+
+.darkMode .BTN.primary {
+    background: #1c1c1c;
+}
+
+.darkMode .BTN.primary:hover {
+    background: #444;
+}
+
+.darkMode .BTN.option:hover {
+    background: #444;
+}
+
+.darkMode li.project-item {
+    background: #1c1c1c;
+}
+
+.darkMode .project-progress-bar-container {
+    background: #444;
+}
+
+.darkMode .project-progress-bar-completion {
+    background: #fafafa;
+}
+
+.darkMode span.project-days-left {
+    background: #2c2c2c;
+    color: #666;
+}
+
+.darkMode span.projct-status {
+    color: #444;
+}
+
+.darkMode span.project-status-indicator {
+    background: #444;
+}
+
+.darkMode .project-prop {
+    color: #444;
+}
+
+.darkMode span.title {
+    color: #fafafa;
+}
+
+.darkMode a.project-option {
+    color: #444;
+}
+
+.darkMode .project-option-menu {
+    background: #1c1c1c;
+    color: #fafafa;
+}
+
+.darkMode li.project-option-item > a:hover {
+    background: #4444;
+}
+
+.darkMode li.project-option-item > a.delete-project:hover {
+    background: #d56c6c;
+}
+
+.darkMode .interactive-wrap {
+    background: #1c1c1c;
+    color: #fafafa;
+}
+
+.darkMode input.light, .darkMode select.light, .darkMode textarea.light {
+    background: #2c2c2c;
+    color: #fafafa;
+}
+
+.darkMode input::placeholder, .darkMode input.light::placeholder, .darkMode select.light::placeholder {
+    color: #444;
+}
+
+.darkMode select.place_holder {
+    color: #444;
+}
+
+.darkMode option {
+    color: #fafafa;
+}
+
+.darkMode .color-select-container label > input[type="radio"], .darkMode .icon-select-container label > input[type="radio"] {
+    background: #2c2c2c;
+}
+
+.darkMode .f-project-icon > i {
+    color: #fafafa;
+}
+
+.darkMode form .BTN.primary {
+    background: #444;
+    color: #fafafa;
+}
+
+.darkMode form .BTN.secondary {
+    background: #2c2c2c;
+    color: #fafafa;
+}
+
+.darkMode form .BTN.primary:hover {
+    background: #2c2c2c;
+}
+
+.darkMode form .BTN.secondary:hover {
+    background: #444;
+}
+
+.darkMode h3 {
+    color: #fafafa;
+}
+
+.darkMode li.task-item {
+    background: #1c1c1c;
+    color: #fafafa;
+}
+
+.darkMode label.input-container {
+    background: #444;
+}
+
+.darkMode .task-details > div {
+    color: #444;
+}
+
+.darkMode a.task-sub-menu {
+    color: #444;
+}
+
+.darkMode span.warning {
+    border-color: #444;
+    border-style: dashed;
+    color: #444;
+}
+
+.darkMode .task-option-menu-item > a {
+    color: #fafafa;
+}
+
+.darkMode .task-option-menu-container {
+    background: #1c1c1c;
+}
+
+.darkMode a.delete-task {
+    color: #d56c6c;
+}
+
+.darkMode .task-notes-container > p {
+    color: #444;
+}
+
+.darkMode .task-status-output[status="Priority"] {
+    color: #db4b4b;
+}
+
+.darkMode .task-extra-content {
+    border-color: #444;
+}
+
 
 
 /* responsive */

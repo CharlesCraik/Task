@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Task</title>
+        <link rel="icon" type="image/x-icon" href="../media/icons/file.svg">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="../style/util/iconsax-css/style.css">
+        <link rel="stylesheet" href="../style/style.css">
+        <script type="module" src="../scripts/js/currentUser.js"></script>
+    </head>
+    <body>
+        <section class='main-viewport row'>
+            <header class="main-nav-wrap">
+                <nav class="nav-container">
+                    <ul class="main-menu column">
+                        <li class="menu-item">
+                            <a href="/" class="icon-link">
+                                <i class="isax isax-element-45"></i>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="tasks.html" class="icon-link">
+                                <i class="isax isax-task-square5"></i>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#" class="icon-link">
+                                <i class="isax isax-archive-24"></i>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="analytics.html" class="icon-link active">
+                                <i class="isax isax-graph5"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+            <section class="content-viewport">
+                <div class="content-viewport-header row stretch">
+                    <h1>Analytics</h1>
+                    <div class="user-display-container row">
+                        <button class="BTN option" id="darkMode"><i class='isax isax-moon5'></i></button>
+                        <div class="user-info-container row align-c">
+                            <span class="user-info-name" id="displayUserInfo_name"></span>
+                            <div class="user-info-avatar"></div>                          
+                        </div>
+                    </div>
+                </div>
+                
+            </section>
+        </section>
+        <script src="../scripts/js/display-logic.js"></script>
+    </body>
+</html>
