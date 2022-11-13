@@ -136,3 +136,85 @@ function hideTaskOptions(id){
     var target = document.querySelector(ref);
     target.classList.remove('editing');  
 }
+
+
+// authentication switch
+if(window.location.pathname == '/pages/authentication.html'){
+    const createAccountSection = document.querySelector('#createAccountContainer');
+    const signInSection = document.querySelector('#signInContainer');
+    const signInSwitcher = document.querySelector('#alreadyMember');
+    const createAccountSwitcher = document.querySelector('#notAMember');
+
+    const forgotPasswordSection = document.querySelector('#forgotPasswordContainer');
+    const returnToSignUpSwitcher = document.querySelector('#goBackToSignIn');
+    const forgotPasswordSwitcher = document.querySelector('#forgottenPassword');
+
+
+    signInSwitcher.addEventListener('click', function(event){
+        event.preventDefault();
+        createAccountSection.classList.remove('active');
+        createAccountSection.classList.add('inactive');
+        signInSection.classList.remove('inactive');
+        signInSection.classList.add('active');
+    });
+    
+    createAccountSwitcher.addEventListener('click', function(event){
+        event.preventDefault();
+        createAccountSection.classList.remove('inactive');
+        createAccountSection.classList.add('active');
+        signInSection.classList.remove('active');
+        signInSection.classList.add('inactive');
+    });
+
+    forgotPasswordSwitcher.addEventListener('click', function(event){
+        event.preventDefault();
+        forgotPasswordSection.classList.remove('inactive');
+        forgotPasswordSection.classList.add('active');
+        signInSection.classList.remove('active');
+        signInSection.classList.add('inactive');
+        
+    });
+
+    returnToSignUpSwitcher.addEventListener('click', function(event){
+        event.preventDefault();
+        signInSection.classList.add('active');
+        signInSection.classList.remove('inactive');
+        forgotPasswordSection.classList.add('inactive');
+        forgotPasswordSection.classList.remove('active');
+    });
+}
+
+// account tabs
+const tabs = document.querySelectorAll('.settings-panel-tab');
+const panels = document.querySelectorAll('.settings-panel');
+
+tabs.forEach(function(item){
+    item.addEventListener('click', function(event){
+        event.preventDefault();
+        openTab(item);
+    });
+})
+
+function openTab(initiator){
+    const target = initiator.getAttribute('data-target');
+    const thisPanel = document.querySelector('#' + target);
+    
+    panels.forEach(function(panel){
+        if(panel.classList.contains('active')){
+            panel.classList.remove('active');
+            panel.classList.add('inactive');
+        }
+    });
+
+    tabs.forEach(function(tab){
+        if(tab.classList.contains('active')){
+            tab.classList.remove('active');
+            tab.classList.add('inactive');
+        }
+    });
+
+    initiator.classList.remove('inactive');
+    thisPanel.classList.remove('inactive');
+    initiator.classList.add('active');
+    thisPanel.classList.add('active');
+}

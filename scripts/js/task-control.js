@@ -584,7 +584,6 @@ function markTaskComplete(id){
 }
 
 async function deleteTask(id){
-    const { error } = await supabase.from('Tasks').delete().eq('id', id);
     
     tasks = tasks.filter(function(item){
         if(item.id == id){
@@ -597,6 +596,7 @@ async function deleteTask(id){
         }
         return item.id != id;
     });
+    const { error } = await supabase.from('Tasks').delete().eq('id', id);
     initTasks(tasks);
 }
 

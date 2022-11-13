@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tasked</title>
+        <link rel="icon" type="image/x-icon" href="../media/icons/file.svg">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="../style/util/iconsax-css/style.css">
+        <link rel="stylesheet" href="../style/style.css">
+        <script type="module" src="../scripts/js/currentUser.js"></script>
+    </head>
+    <body>
+        <section class='main-viewport row'>
+            <header class="main-nav-wrap">
+                <nav class="nav-container">
+                    <ul class="main-menu column">
+                        <li class="menu-item">
+                            <a href="/" class="icon-link">
+                                <i class="isax isax-element-45"></i>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="./tasks.html" class="icon-link">
+                                <i class="isax isax-task-square5"></i>
+                            </a>
+                        </li>
+                        <!-- <li class="menu-item">
+                            <a href="#" class="icon-link">
+                                <i class="isax isax-archive-24"></i>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="./pages/analytics.html" class="icon-link">
+                                <i class="isax isax-graph5"></i>
+                            </a>
+                        </li> -->
+                    </ul>
+                </nav>
+                <div class="menu-item">
+                    <a href="#" class="icon-link" id="signOut">
+                        <i class="isax isax-logout5"></i>  
+                    </a>
+                </div>
+            </header>
+            <section class="content-viewport">
+                <div class="content-viewport-header row stretch">
+                    <h1>Settings</h1>
+                    <div class="user-display-container row">
+                        <button class="BTN option" id="darkMode"><i class='isax isax-moon5'></i></button>
+                        <div class="user-info-container row align-c">
+                            <span class="user-info-name" id="displayUserInfo_name"></span>
+                            <div class="user-info-avatar">
+                                <a href="./account.html"></a>
+                            </div>                          
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-tabs-container">
+                    <ul class="settings-tabs row">
+                        <li class="settings-tab">
+                            <span id="accountTab" class="active settings-panel-tab" data-target="accountPanel">Account</span>
+                        </li>
+                        <li class="settings-tab">
+                            <span id="notificationTab" class="inactive settings-panel-tab" data-target="notificationPanel">Notifications</span>
+                        </li>
+                        <li class="settings-tab">
+                            <span id="otherSettingsTab" class="inactive settings-panel-tab" data-target="otherSettingsPanel">Other</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="settings-container-wrap">
+                    <div class="settings-panel active account-panel" id="accountPanel">
+                        <div class="settings-form-container">
+                            <form id="updateAccountForm">
+                                <div class="field-row">
+                                    <div class="field-container">
+                                        <label>First Name</label>
+                                        <input type="text" class="light white" data-type="populated" id="userFirstName" placeholder="Enter your first name...">
+                                    </div>
+                                    <div class="field-container">
+                                        <label>Last Name</label>
+                                        <input type="text" class="light white" data-type="populated" id="userLastName" placeholder="Enter your last name...">
+                                    </div>
+                                </div>
+                                <div class="field-container">
+                                    <label>Email</label>
+                                    <input type="email" class="light white" data-type="populated" id="userEmail" placeholder="Enter your email address...">
+                                </div>
+                                <div class="field-container">
+                                    <label>Mobile</label>
+                                    <input type="tel" class="light white" data-type="populated" id="userMobile" placeholder="Enter your mobile number...">
+                                </div>
+                                <div class="field-row account-password-wrap">
+                                    <div class="field-container">
+                                        <label>Password</label>
+                                        <input type="password" class="light white" data-type="populated" id="userPassword" placeholder="Enter your password...">
+                                    </div>
+                                    <div class="field-container">
+                                        <button class="BTN primary" id="changePassword">Change Password</button>
+                                    </div>
+                                </div>
+                                <div class="change-password-container inactive" id="accountPasswordReset">
+                                    <h4>Reset My Password</h4>
+                                    <form id="accountPasswordResetForm">
+                                        <div class="field-row">
+                                            <div class="field-container">
+                                                <label>New Password</label>
+                                                <input type="password" class="light" id="userNewPassword" placeholder="Create a new password...">
+                                            </div>
+                                            <div class="field-container">
+                                                <label>Last Name</label>
+                                                <input type="password" class="light" id="userConfirmNewPassword" placeholder="Confirm new password...">
+                                            </div>
+                                        </div>
+                                        <div class="button-container">
+                                            <button class="BTN primary" id="accountSetNewPassword">Update Password</button>
+                                            <a class="BTN secondary" id="cancelPasswordReset">Cancel</a>
+                                        </div>
+                                    </form>
+                                </div>
+                                <button class="BTN primary" id="updateAccount" type="submit">Update Account</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="settings-panel inactive notification-panel" id="notificationPanel">
+                        <span class="subtitle">Notifications</span>
+                    </div>
+                    <div class="settings-panel inactive other-settings-panel" id="otherSettingsPanel">
+                        <span class="subtitle">Other Settings</span>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <script src="/scripts/js/display-logic.js"></script>
+    </body>
+</html>

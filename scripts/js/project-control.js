@@ -406,6 +406,9 @@ function getProjectProgress(id){
     
     var thisProgress = 0;
     
+    //console.table(thisProject);
+    //console.table(projectTasks);
+
     projectTasks.forEach(function(item){
         const task = tasks.find(target => target.id == item);
         if(task.task_done == true){

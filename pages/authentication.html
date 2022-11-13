@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tasked</title>
+        <link rel="icon" type="image/x-icon" href="../media/icons/file.svg">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="../style/util/iconsax-css/style.css">
+        <link rel="stylesheet" href="../style/style.css">
+    </head>
+    <body>
+        <section class="main-viewport">
+            <section class="split-viewport row">
+                <button class="BTN option" id="darkMode"><i class='isax isax-moon5'></i></button>
+                <div class="user-actions split-col">
+                    <div class="action-wrap">
+                        <div class="sign-in-container action-container active" id="signInContainer">
+                            <div class="action-info">
+                                <h1>Sign In</h1>
+                                <span class="subtitle">Sign into your account</span>
+                            </div>
+                            <form id="signInForm">
+                                <div class="field-container">
+                                    <label>Email</label>
+                                    <input type="email" class="light" id="signIn_email" placeholder="Enter your email...">
+                                </div>
+                                <div class="field-container">
+                                    <label>Password</label>
+                                    <input type="password" class="light" id="signIn_password" placeholder="Enter your password...">
+                                </div>
+                                <div class="auth-footer-buttons row align-c">
+                                    <button class="BTN primary" id="signIn" type="submit">Sign In</button>
+                                    <button class="BTN secondary" id="notAMember">Create An Account</button>
+                                </div>
+                            </form>
+                            <div class="action-links">
+                                <span class="director" id="forgottenPassword"><u>Forgot Password</u></span>
+                            </div>
+                        </div>
+                        
+                        <div class="create-account-container action-container inactive" id="createAccountContainer">
+                            <div class="action-info">
+                                <h1>Sign Up</h1>
+                                <span class="subtitle">Create an account for free!</span>
+                            </div>
+                            <form id="createAccountForm">
+                                <div class="field-row">
+                                    <div class="field-container">
+                                        <label>First Name</label>
+                                        <input type="text" class="light" id="newUser_firstName" placeholder="Enter your first name...">
+                                    </div>
+                                    <div class="field-container">
+                                        <label>Last Name</label>
+                                        <input type="text" class="light" id="newUser_lastName" placeholder="Enter your last name...">
+                                    </div>
+                                </div>
+                                <div class="field-container">
+                                    <label>Email</label>
+                                    <input type="email" class="light" id="newUser_email" placeholder="Enter your email...">
+                                </div>
+                                <div class="field-container">
+                                    <label>Password</label>
+                                    <input type="password" class="light" id="newUser_password" placeholder="Create a password...">
+                                </div>
+                                <div class="auth-footer-buttons row align-c">
+                                    <button class="BTN primary" id="createAccount" type="submit">Create Account</button>
+                                    <button class="BTN secondary" id="alreadyMember">Already A Member</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="forgot-password-container action-container inactive" id="forgotPasswordContainer">
+                            <div class="action-info">
+                                <h1>Forgotten Password</h1>
+                                <span class="subtitle">Enter your details below to reset your password</span>
+                            </div>
+                            <form id="forgotPasswordForm">
+                                <div class="field-container">
+                                    <label>Email</label>
+                                    <input type="email" class="light" id="fg_email" placeholder="Enter your account's email...">
+                                </div>
+                                <div class="auth-footer-buttons row align-c">
+                                    <button class="BTN primary" id="resetPassword" type="submit">Reset My Password</button>
+                                    <button class="BTN secondary" id="goBackToSignIn">Go Back</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="site-info split-col">
+                    
+                </div>
+            </section>
+        </section>
+        <script src="../scripts/js/display-logic.js"></script>
+        <script type="module" src="../scripts/js/auth.js"></script>
+    </body>
+</html>

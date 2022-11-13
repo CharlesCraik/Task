@@ -31,7 +31,46 @@ async function createAccount(userEmail, userPassword, userFirstName, userLastNam
               last_name: userLastName
             }
           }
-      })
+    });
     window.location.href = "/";
 }
 
+
+// sign in
+const signInForm = document.querySelector('#signInForm');
+const signInEmail = document.querySelector('#signIn_email');
+const signInPassword = document.querySelector('#signIn_password');
+
+signInForm.addEventListener('submit', function(event){
+    event.preventDefault();
+    console.log('Signing in...');
+    const email = signInEmail.value;
+    const password = signInPassword.value;
+    signIn(email, password);
+});
+
+async function signIn(userEmail, userPassword){
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email: userEmail,
+        password: userPassword,
+    });
+    window.location.href = "/";
+}
+
+
+// forgot password
+const forgotPasswordForm = document.querySelector('#forgotPasswordForm');
+const forgotPasswordEmail = document.querySelector('#fg_email');
+
+forgotPasswordForm.addEventListener('submit', function(event){
+    event.preventDefault();
+    console.log('Sending Email...');
+    const email = forgotPasswordEmail.value;
+    recoverPassword(email);
+});
+
+async function recoverPassword(userEmail){
+    const { data, error } = await supabase.auth.resetPasswordForEmail(userEmail, {
+        redirectTo: '/pages/recover-password.html',
+    });
+}
